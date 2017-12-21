@@ -1,1 +1,1 @@
-# curiumcheat-csgo
+# Curium for CSGO
