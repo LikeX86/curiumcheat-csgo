@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #include "Offsets.h"
 #include "UTIL Functions.h"
 
@@ -188,5 +184,4 @@ namespace Offsets
 		DWORD dwGetPlayerCompRank;
 		DWORD dwIsReady;
 	};
-
 };

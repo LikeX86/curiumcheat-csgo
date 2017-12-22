@@ -64,6 +64,9 @@
     <Filter Include="Source Files\Menu">
       <UniqueIdentifier>{d8551803-e03b-4a1d-9348-77a3b6d8dce3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Junkcode">
+      <UniqueIdentifier>{ff266c62-5d3b-4ea8-8eac-2a900050e1fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DLLMain.h">
@@ -191,6 +194,9 @@
     </ClInclude>
     <ClInclude Include="Resolver.h">
       <Filter>Header Files\Hacks</Filter>
+    </ClInclude>
+    <ClInclude Include="ESPJunk.h">
+      <Filter>Header Files\Junkcode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,23 +1,27 @@
-// Don't take credits for this ;) Joplin / Manhhao are the first uploaders ;)
-
 #include "ESP.h"
 #include "Interfaces.h"
 #include "RenderManager.h"
+// Junk code
+#include "ESPJunk.h"
 
 void CEsp::Init()
 {
 	BombCarrier = nullptr;
 }
 
-// Yeah dude we're defo gunna do some sick moves for the esp yeah
-void CEsp::Move(CUserCmd *pCmd,bool &bSendPacket) 
-{
-
-}
-
 // Main ESP Drawing loop
 void CEsp::Draw()
 {
+	// Junk functions
+	SDMZZpSzSGYbCsFtBHiAbqVBDqa();
+	dip();
+	tfkwJiTQdBdHQPcghsZjQgAyXZ();
+	BBhMDubfu();
+	RmAXMnZiBTRj();
+	saCUTPGFYgPSSgqgcgmPTYBAN();
+	RQaAWSQeOFpmoGoboDbN();
+	KQHpunOGlMXDh();
+
 	IClientEntity *pLocal = hackManager.pLocal();
 
 	if (Menu::Window.MiscTab.OtherSpectators.GetState())
@@ -143,20 +147,6 @@ void CEsp::DrawPlayer(IClientEntity* pEntity, player_info_t pinfo)
 	{
 		Color = GetPlayerColor(pEntity);
 
-		/*if (Menu::Window.VisualsTab.OptionsGlow.GetState())
-		{
-			int TeamNum = pEntity->GetTeamNum();
-
-			if (TeamNum == TEAM_CS_T)
-			{
-				DrawGlow(pEntity, 255, 0, 0, 160);
-			}
-			else if (TeamNum == TEAM_CS_CT)
-			{
-				DrawGlow(pEntity, 0, 0, 255, 160);
-			}
-		}*/
-
 		if (Menu::Window.VisualsTab.OptionsBox.GetState())
 			DrawBox(Box, Color);
 
@@ -176,45 +166,6 @@ void CEsp::DrawPlayer(IClientEntity* pEntity, player_info_t pinfo)
 			DrawSkeleton(pEntity);
 	}
 }
-
-// glow shit
-/*struct Glowobject
-{
-	IClientEntity* pEntity;
-	Vector Color;
-	float Alpha;
-	byte PAD[16];
-	bool RenderWhenOccluded;
-	bool RenderWhenUnOccluded;
-	bool FullBloomRender;
-	byte PAD2[17];
-};
-
-// simple sexy glow
-void CEsp::DrawGlow(IClientEntity *pEntity, int r, int g, int b, int a)
-{
-	static uintptr_t Module = (uintptr_t)GetModuleHandle("client.dll");
-
-	Glowobject* GlowManager = *(Glowobject**)(Module + 0x4B71C6C);
-
-	if (GlowManager)
-	{
-		Glowobject* GlowObject = &GlowManager[pEntity->GetGlowIndex()];
-
-		if (GlowObject)
-		{
-			GlowObject->RenderWhenOccluded = 1;
-			GlowObject->RenderWhenUnOccluded = 0;
-
-			float glowr = (1 / 255.0f)*r;
-			float glowg = (1 / 255.0f)*g;
-			float glowb = (1 / 255.0f)*b;
-			float glowa = (1 / 255.0f)*a;
-			GlowObject->Color = Vector((1 / 255.0f)*r, (1 / 255.0f)*g, (1 / 255.0f)*b);
-			GlowObject->Alpha = (1 / 255.0f)*a;
-		}
-	}
-}*/
 
 // Gets the 2D bounding box for the entity
 // Returns false on failure nigga don't fail me

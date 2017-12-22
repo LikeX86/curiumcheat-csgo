@@ -138,6 +138,7 @@
     <ClInclude Include="EngineClient.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="ESP.h" />
+    <ClInclude Include="ESPJunk.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="Hacks.h" />
     <ClInclude Include="Resolver.h" />

@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #include "Interfaces.h"
 #include "Utilities.h"
 
@@ -98,5 +94,4 @@ namespace Interfaces
 	IPhysicsSurfaceProps* PhysProps;
 	ICVar *CVar;
 	CInput* pInput;
-
 };

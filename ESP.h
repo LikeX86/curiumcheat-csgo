@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #pragma once
 
 #include "Hacks.h"
@@ -11,7 +7,6 @@ class CEsp : public CHack
 public:
 	void Init();
 	void Draw();
-	void Move(CUserCmd *pCmd, bool &bSendPacket);
 private:
 
 	// Other shit
@@ -31,7 +26,7 @@ private:
 
 	// Draw shit about player
 	void SpecList();
-	void DrawGlow(IClientEntity *pEntity, int r, int g, int b, int a);
+	// unused shit - void DrawGlow(IClientEntity *pEntity, int r, int g, int b, int a);
 	void DrawBox(ESPBox size, Color color);
 	void DrawName(player_info_t pinfo, ESPBox size);
 	void DrawHealth(IClientEntity* pEntity, ESPBox size);
