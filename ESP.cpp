@@ -21,6 +21,8 @@ void CEsp::Draw()
 	saCUTPGFYgPSSgqgcgmPTYBAN();
 	RQaAWSQeOFpmoGoboDbN();
 	KQHpunOGlMXDh();
+	aBMVIbTMZiRJsiFtblT();
+	TPCdKBybkLdiXhfItuo();
 
 	IClientEntity *pLocal = hackManager.pLocal();
 
