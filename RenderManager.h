@@ -1,15 +1,8 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #pragma once
 
 #include "Interfaces.h"
 
 #include "Vector2D.h"
-
-void Quad();
-
 
 namespace Render
 {
@@ -47,4 +40,3 @@ namespace Render
 	bool WorldToScreen(Vector &in, Vector &out);
 	RECT GetViewport();
 };
-
