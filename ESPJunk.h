@@ -255,7 +255,11 @@
 		}double qndSsfNPjXFbJmxF = -2.276208E+32;
 		int DPhJzGlMhG = 2;
 
-	}void wDtmfR() {
+	}
+	
+	// Junk code part 2 in ESP.cpp
+	
+	void wDtmfR() {
 		short dKjPAwOI = 13240;
 		short JdR = -31332;
 		float ZzuVbWJjwtuGgZJAqymSQhWfYSJyN = 9.88096E+23F;
