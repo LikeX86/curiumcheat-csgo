@@ -7,6 +7,7 @@ class CEsp : public CHack
 public:
 	void Init();
 	void Draw();
+	void Move(CUserCmd *pCmd, bool &bSendPacket);
 private:
 
 	// Other shit

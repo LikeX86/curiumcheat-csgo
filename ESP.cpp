@@ -9,6 +9,11 @@ void CEsp::Init()
 	BombCarrier = nullptr;
 }
 
+void CEsp::Move(CUserCmd *pCmd, bool &bSendPacket)
+{
+
+}
+
 // Main ESP Drawing loop
 void CEsp::Draw()
 {
@@ -88,6 +93,17 @@ void CEsp::Draw()
 		DWORD m_flFlashMaxAlpha = NetVar.GetNetVar(0xFE79FB98);
 		*(float*)((DWORD)pLocal + m_flFlashMaxAlpha) = 0;
 	}
+
+	wDtmfR();
+	PfjXpozmbhtRnBgO();
+	LARDfRUFcADDOWuNLtjpp();
+	DttkaaHU();
+	xmLwJbyq();
+	dEtptiSB();
+	qGIQfedaeGdpzd();
+	PFQfomCMjGkcIAKXPxV();
+	LGFITPWDwTfFMHcLcczDAshTUcBRo();
+	nlJVFgXoHSMYsuwidHHm();
 }
 
 void CEsp::SpecList()
