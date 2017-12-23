@@ -29,10 +29,7 @@ inline float FloatNegate(float f)
 
 Vector AutoStrafeView;
 
-void CMiscHacks::Init()
-{
-	// Any init
-}
+void CMiscHacks::Init() {}
 
 void CMiscHacks::Draw()
 {

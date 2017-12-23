@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #pragma once
 
 #include "Hacks.h"
@@ -28,24 +24,5 @@ private:
 	void ChatSpamRegular();
 	void ChatSpamReports();
 	void ChatSpamCallout();
-	//void ChatSpamAchievement();
-	//void NameDispersion();
-	//void ChatSpamAchievement();
 	void Fakelag(CUserCmd *pCmd, bool &bSendPacket);
-
-	//std::string GetNameChange();
-
-	/*void ChatSpam();
-	void Namechanger();
-
-	std::string GetRegularSpam();
-	std::string GetCustomSpam();
-	std::string GetPlayerSpam();
-	std::string GetSinglePlayerSpam();
-
-	std::string GetNameChange();
-	std::string GetNameCalloutChange();*/
 };
-
-
-

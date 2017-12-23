@@ -673,20 +673,6 @@ void CMiscTab::Setup()
 	FakeLagGroup.PlaceLabledControl("Randomize Send", this, &SendRandomize);
 #pragma endregion fakelag shit
 
-#pragma region Teleport
-	TeleportGroup.SetPosition(16, 316);
-	TeleportGroup.SetSize(360, 75);
-	TeleportGroup.SetText("Teleport");
-	RegisterControl(&TeleportGroup);
-
-	TeleportEnable.SetFileId("teleport_enable");
-	TeleportGroup.PlaceLabledControl("Enable", this, &TeleportEnable);
-
-	TeleportKey.SetFileId("teleport_key");
-	TeleportGroup.PlaceLabledControl("Key", this, &TeleportKey);
-
-#pragma endregion
-
 /*#pragma region OverideFov
 	FOVGroup.SetPosition(16, 365);
 	FOVGroup.SetSize(360, 75);
