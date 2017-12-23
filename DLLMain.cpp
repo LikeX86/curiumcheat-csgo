@@ -1,7 +1,3 @@
-// Don't take credits for this ;) Joplin / Manhhao are the first uploaders ;)
-
-//#define AYY_DEBUG
-
 // General shit
 #include "DLLMain.h"
 #include "Utilities.h"
@@ -74,11 +70,7 @@ int InitialThread()
 
 // DllMain
 // Entry point for our module
-BOOL WINAPI DllMain(
-	_In_ HINSTANCE hinstDLL,
-	_In_ DWORD     fdwReason,
-	_In_ LPVOID    lpvReserved
-	)
+BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_ LPVOID lpvReserved)
 {
 	switch (fdwReason)
 	{
@@ -93,6 +85,5 @@ BOOL WINAPI DllMain(
 	case DLL_PROCESS_DETACH:
 		break;
 	}
-
 	return TRUE;
 }

@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework
-*/
-
 #pragma once
 
 #define AYYWARE_META_GAME "Counter-Strike: Global Offensive"
