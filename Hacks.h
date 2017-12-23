@@ -1,9 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
-#pragma once
-
 #pragma once
 
 #include "CommonIncludes.h"

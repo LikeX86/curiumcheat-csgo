@@ -1,5 +1,3 @@
-// Don't take credits for this ;) Joplin / Manhhao are the first uploaders ;)
-
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "MiscHacks.h"
@@ -182,36 +180,6 @@ void CMiscHacks::RageStrafe(CUserCmd *pCmd)
 				pCmd->forwardmove = 450.f;
 		}
 	}
-
-/*	IClientEntity* pLocal = hackManager.pLocal();
-	static bool bDirection = true;
-
-
-	static float move = 450; //400.f; // move = max(move, (abs(cmd->move.x) + abs(cmd->move.y)) * 0.5f);
-	float s_move = move * 0.5065f;
-
-
-	if ((pCmd->buttons & IN_JUMP) || !(pLocal->GetFlags() & FL_ONGROUND))
-	{
-		pCmd->forwardmove = move * 0.015f;
-		pCmd->sidemove += (float)(((pCmd->tick_count % 2) * 2) - 1) * s_move;
-
-		if (pCmd->mousedx)
-			pCmd->sidemove = (float)clamp(pCmd->mousedx, -1, 1) * s_move;
-
-		static float strafe = pCmd->viewangles.y;
-
-		float rt = pCmd->viewangles.y, rotation;
-		rotation = strafe - rt;
-
-		if (rotation < FloatNegate(Interfaces::Globals->interval_per_tick))
-			pCmd->sidemove = -s_move;
-
-		if (rotation > Interfaces::Globals->interval_per_tick)
-			pCmd->sidemove = s_move;
-
-		strafe = rt;
-	} */
 }
 
 Vector GetAutostrafeView()
@@ -219,7 +187,6 @@ Vector GetAutostrafeView()
 	return AutoStrafeView;
 }
 
-// �e սʿ
 void CMiscHacks::ChatSpamInterwebz()
 {
 	static clock_t start_t = clock();
@@ -228,7 +195,6 @@ void CMiscHacks::ChatSpamInterwebz()
 		return;
 
 	static bool wasSpamming = true;
-	//static std::string nameBackup = "INTERWEBZ";
 
 	if (wasSpamming)
 	{
@@ -256,7 +222,6 @@ void CMiscHacks::ChatSpamDisperseName()
 		return;
 
 	static bool wasSpamming = true;
-	//static std::string nameBackup = "INTERWEBZ";
 
 	if (wasSpamming)
 	{
@@ -299,7 +264,6 @@ void CMiscHacks::ChatSpamName()
 	}
 
 	static bool wasSpamming = true;
-	//static std::string nameBackup = "INTERWEBZ.CC";
 
 	int randomIndex = rand() % Names.size();
 	char buffer[128];
@@ -330,11 +294,11 @@ void CMiscHacks::ChatSpamRegular()
 
 	if (Menu::Window.MiscTab.OtherTeamChat.GetState())
 	{
-		SayInTeamChat("INTERWEBZ.CC OWNS ME AND ALL");
+		SayInTeamChat("EZ");
 	}
 	else
 	{
-		SayInChat("INTERWEBZ.CC OWNS ME AND ALL");
+		SayInChat("EZ");
 	}
 
 	start_t = clock();

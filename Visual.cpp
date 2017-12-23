@@ -2,13 +2,8 @@
 #include "Interfaces.h"
 #include "RenderManager.h"
 
-// Any init here
-void CVisuals::Init()
-{
-	// Idk
-}
+void CVisuals::Init() {}
 
-// Don't really need to do anything in here
 void CVisuals::Move(CUserCmd *pCmd, bool &bSendPacket) {}
 
 // Main ESP Drawing loop
@@ -21,8 +16,6 @@ void CVisuals::Draw()
 	// Recoil Crosshair
 	if (Menu::Window.VisualsTab.OtherRecoilCrosshair.GetIndex())
 		DrawRecoilCrosshair();
-
-	
 }
 
 // Draw a basic crosshair

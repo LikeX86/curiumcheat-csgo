@@ -1,5 +1,3 @@
-// Don't take credits for this ;) Joplin / Manhhao are the first uploaders ;)
-
 #include "RageBot.h"
 #include "RenderManager.h"
 #include "Resolver.h"
@@ -17,10 +15,7 @@ void CRageBot::Init()
 	TargetID = -1;
 }
 
-void CRageBot::Draw()
-{
-
-}
+void CRageBot::Draw() { }
 
 bool IsAbleToShoot(IClientEntity* pLocal)
 {
@@ -1422,4 +1417,3 @@ void CRageBot::DoAntiAim(CUserCmd *pCmd, bool &bSendPacket) // pCmd->viewangles.
 	// Angle offset
 	pCmd->viewangles.y += Menu::Window.RageBotTab.AntiAimOffset.GetValue();
 }
-

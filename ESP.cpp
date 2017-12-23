@@ -9,10 +9,7 @@ void CEsp::Init()
 	BombCarrier = nullptr;
 }
 
-void CEsp::Move(CUserCmd *pCmd, bool &bSendPacket)
-{
-
-}
+void CEsp::Move(CUserCmd *pCmd, bool &bSendPacket) {}
 
 // Main ESP Drawing loop
 void CEsp::Draw()

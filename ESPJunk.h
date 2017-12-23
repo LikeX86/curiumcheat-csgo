@@ -1,6 +1,6 @@
 #pragma once
 
-//Random generated junk code for no VAC detection
+// Random generated junk code to make cheat undetected
 
 	void SDMZZpSzSGYbCsFtBHiAbqVBDqa() {
 		float IOgFDVxQ = 4.347739E-19F;
