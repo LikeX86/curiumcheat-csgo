@@ -1,6 +1,7 @@
-#include "MetaInfo.h"
-#include "Utilities.h"
+//#include "MetaInfo.h"
+//#include "Utilities.h"
 
+/*
 void PrintMetaHeader()
 {
 	printf("                                  Ayy");
@@ -10,3 +11,4 @@ void PrintMetaHeader()
 	Utilities::Log("Build %s", __DATE__);
 	Utilities::Log("Setting Up AyyWare for %s", AYYWARE_META_GAME);
 }
+*/

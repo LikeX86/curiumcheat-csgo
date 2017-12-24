@@ -35,8 +35,6 @@ int InitialThread()
 #ifdef AYY_DEBUG
 	Utilities::OpenConsole("AyyWare");
 #endif
-	// Intro banner with info
-	PrintMetaHeader();
 
 	//---------------------------------------------------------
 	// Initialise all our shit
