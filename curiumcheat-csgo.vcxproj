@@ -149,7 +149,6 @@
     <ClInclude Include="Materials.h" />
     <ClInclude Include="MathFunctions.h" />
     <ClInclude Include="Menu.h" />
-    <ClInclude Include="MetaInfo.h" />
     <ClInclude Include="MiscClasses.h" />
     <ClInclude Include="MiscDefinitions.h" />
     <ClInclude Include="MiscHacks.h" />
@@ -183,7 +182,6 @@
     <ClCompile Include="LegitBot.cpp" />
     <ClCompile Include="MathFunctions.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="MetaInfo.cpp" />
     <ClCompile Include="MiscHacks.cpp" />
     <ClCompile Include="NetVarManager.cpp" />
     <ClCompile Include="NetVars.cpp" />

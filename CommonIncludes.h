@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #pragma once
 #define _WINSOCKAPI_
 
@@ -13,5 +9,3 @@ Syn's AyyWare Framework 2015
 #include <string>
 #include <conio.h>
 #include <vector>
-
-#include "MetaInfo.h"

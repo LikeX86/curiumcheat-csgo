@@ -24,15 +24,6 @@
 // Purpose: Contains misc functionality for memory related functionality
 namespace Utilities
 {
-	// Debug console controls
-	void OpenConsole(std::string Title);
-	void CloseConsole();
-	void Log(const char *fmt, ...);
-
-	void EnableLogFile(std::string filename);
-
-	void SetConsoleColor(WORD color);  
-
 	// Misc Shizz
 	std::string GetTimeString();
 	

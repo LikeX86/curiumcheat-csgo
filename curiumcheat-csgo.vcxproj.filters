@@ -84,9 +84,6 @@
     <ClInclude Include="CommonIncludes.h">
       <Filter>Header Files\Common</Filter>
     </ClInclude>
-    <ClInclude Include="MetaInfo.h">
-      <Filter>Header Files\Common</Filter>
-    </ClInclude>
     <ClInclude Include="Interfaces.h">
       <Filter>Header Files\Source Engine</Filter>
     </ClInclude>
@@ -208,9 +205,6 @@
     </ClCompile>
     <ClCompile Include="Utilities.cpp">
       <Filter>Source Files\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="MetaInfo.cpp">
-      <Filter>Source Files\Common</Filter>
     </ClCompile>
     <ClCompile Include="CRC32.cpp">
       <Filter>Source Files\Source Engine\Utilities</Filter>

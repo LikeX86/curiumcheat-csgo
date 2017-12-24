@@ -1,7 +1,6 @@
 #include "GUI.h"
 
 #include "RenderManager.h"
-#include "MetaInfo.h"
 
 #include <algorithm>
 #include "tinyxml2.h"
@@ -263,11 +262,7 @@ bool CGUI::DrawWindow(CWindow* window)
 	Render::GradientV(window->m_x + 2, window->m_y + 2, window->m_iWidth - 4, 26, Color(45, 40, 40, 255), Color(45, 45, 40, 255));
 	Render::Clear(window->m_x + 2, window->m_y + 2 + 26, window->m_iWidth - 4, window->m_iHeight - 4 - 26, Color(49, 42, 42, 255));
 	Render::Outline(window->m_x + 1, window->m_y + 1, window->m_iWidth - 2, window->m_iHeight - 2, Color(49, 42, 42, 255));
-	// Main Window
-	/*Render::Outline(window->m_x, window->m_y, window->m_iWidth, window->m_iHeight, Color(21, 21, 21, 80));
-	Render::GradientV(window->m_x + 2, window->m_y + 2, window->m_iWidth - 4, 26, Color(2, 78, 0, 255), Color(7, 255, 37, 255));
-	Render::Clear(window->m_x + 2, window->m_y + 2 + 26, window->m_iWidth - 4, window->m_iHeight - 4 - 26, Color(7, 255, 37, 255));
-	Render::Outline(window->m_x + 1, window->m_y + 1, window->m_iWidth - 2, window->m_iHeight - 2, Color(91, 242, 0, 255));*/
+
 	Render::Text(window->m_x + 8, window->m_y + 8, Color(255, 0, 0, 255), Render::Fonts::MenuBold, window->Title.c_str());
 
 	//Inner
@@ -330,9 +325,7 @@ bool CGUI::DrawWindow(CWindow* window)
 				RECT controlRect = { cAbs.x, cAbs.y, control->m_iWidth, control->m_iHeight };
 				bool hover = false;
 				if (IsMouseInRegion(controlRect))
-				{
 					hover = true;
-				}
 				control->Draw(hover);
 			}
 		}
@@ -348,9 +341,7 @@ bool CGUI::DrawWindow(CWindow* window)
 				RECT controlRect = { cAbs.x, cAbs.y, control->m_iWidth, control->m_iHeight };
 				bool hover = false;
 				if (IsMouseInRegion(controlRect))
-				{
 					hover = true;
-				}
 				control->Draw(hover);
 			}
 		}
@@ -365,17 +356,13 @@ void CGUI::RegisterWindow(CWindow* window)
 
 	// Resorting to put groupboxes at the start
 	for (auto tab : window->Tabs)
-	{
 		for (auto control : tab->Controls)
-		{
 			if (control->Flag(UIFlags::UI_RenderFirst))
 			{
 				CControl * c = control;
 				tab->Controls.erase(std::remove(tab->Controls.begin(), tab->Controls.end(), control), tab->Controls.end());
 				tab->Controls.insert(tab->Controls.begin(), control);
 			}
-		}
-	}
 }
 
 void CGUI::BindWindow(unsigned char Key, CWindow* window)

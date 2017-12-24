@@ -8,6 +8,7 @@
 bool FileLog = false;
 std::ofstream logFile;
 
+/*
 // --------         Utilities Core           ------------ //
 // Opens a debug console
 void Utilities::OpenConsole(std::string Title)
@@ -56,6 +57,8 @@ void Utilities::Log(const char *fmt, ...)
 	}
 }
 
+*/
+
 // Gets the current time as a string
 std::string Utilities::GetTimeString()
 {
@@ -73,6 +76,7 @@ std::string Utilities::GetTimeString()
 	return timeString;
 }
 
+/*
 // Sets the console color for upcoming text
 void Utilities::SetConsoleColor(WORD color)
 {
@@ -86,6 +90,8 @@ void Utilities::EnableLogFile(std::string filename)
 	if (logFile.is_open())
 		FileLog = true;
 }
+
+*/
 
 
 // --------         Utilities Memory           ------------ //
