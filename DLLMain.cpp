@@ -53,9 +53,6 @@ int InitialThread()
 	// Dumping
 	//Dump::DumpClassIds();
 
-	//---------------------------------------------------------
-	Utilities::Log("Ready");
-
 	// While our cheat is running
 	// Junk code every 1 sec
 	while (DoUnload == false)

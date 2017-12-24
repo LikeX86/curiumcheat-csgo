@@ -253,7 +253,6 @@ bool __stdcall CreateMoveClient_Hooked(/*void* self, int edx,*/ float frametime,
 
 			if (pCmd->viewangles.x < -89 || pCmd->viewangles.x > 89 || pCmd->viewangles.y < -180 || pCmd->viewangles.y > 180)
 			{
-				//Utilities::Log("Having to re-normalise!");
 				GameUtils::NormaliseViewAngle(pCmd->viewangles);
 				Beep(750, 800); // Why does it do this
 				if (pCmd->viewangles.x < -89 || pCmd->viewangles.x > 89 || pCmd->viewangles.y < -180 || pCmd->viewangles.y > 180)

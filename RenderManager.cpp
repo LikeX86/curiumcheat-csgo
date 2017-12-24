@@ -56,8 +56,6 @@ void Render::Initialise()
 	// Interfaces::Surface->SetFontGlyphSet(Fonts::MenuBold, "Visitor TT2 BRK", 14, 550, 0, 0, FONTFLAG_ANTIALIAS);
 	Interfaces::Surface->SetFontGlyphSet(Fonts::ESP, "Calibri", 14, 500, 0, 0, FONTFLAG_ANTIALIAS | FONTFLAG_DROPSHADOW);
 	Interfaces::Surface->SetFontGlyphSet(Fonts::MenuText, "Calibri", 16, 500, 0, 0, FONTFLAG_ANTIALIAS);
-
-	Utilities::Log("Render System Ready");
 }
 
 RECT Render::GetViewport()

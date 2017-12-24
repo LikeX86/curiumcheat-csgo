@@ -379,10 +379,8 @@ void CGUI::SaveWindowState(CWindow* window, std::string Filename)
 	tinyxml2::XMLDocument Doc;
 
 	// Root Element is called "ayy"
-	tinyxml2::XMLElement *Root = Doc.NewElement("ayy");
+	tinyxml2::XMLElement *Root = Doc.NewElement("Curium");
 	Doc.LinkEndChild(Root);
-
-	Utilities::Log("Saving Window %s", window->Title.c_str());
 
 	// If the window has some tabs..
 	if (Root && window->Tabs.size() > 0)
@@ -392,8 +390,6 @@ void CGUI::SaveWindowState(CWindow* window, std::string Filename)
 			// Add a new section for this tab
 			tinyxml2::XMLElement *TabElement = Doc.NewElement(Tab->Title.c_str());
 			Root->LinkEndChild(TabElement);
-
-			Utilities::Log("Saving Tab %s", Tab->Title.c_str());
 
 			// Now we itterate the controls this tab contains
 			if (TabElement && Tab->Controls.size() > 0)
@@ -406,14 +402,6 @@ void CGUI::SaveWindowState(CWindow* window, std::string Filename)
 						// Create an element for the control
 						tinyxml2::XMLElement *ControlElement = Doc.NewElement(Control->FileIdentifier.c_str());
 						TabElement->LinkEndChild(ControlElement);
-
-						Utilities::Log("Saving control %s", Control->FileIdentifier.c_str());
-
-						if (!ControlElement)
-						{
-							Utilities::Log("Errorino :("); // s0 cute
-							return;
-						}
 
 						CCheckBox* cbx = nullptr;
 						CComboBox* cbo = nullptr;

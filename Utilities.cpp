@@ -8,57 +8,6 @@
 bool FileLog = false;
 std::ofstream logFile;
 
-/*
-// --------         Utilities Core           ------------ //
-// Opens a debug console
-void Utilities::OpenConsole(std::string Title)
-{
-	AllocConsole();
-	freopen("CONIN$", "r", stdin);
-	freopen("CONOUT$", "w", stdout);
-	freopen("CONOUT$", "w", stderr);
-
-	SetConsoleTitle(Title.c_str());
-}
-
-// Closes the debug console
-void Utilities::CloseConsole()
-{
-	FreeConsole();
-}
-
-// Outputs text to the console
-void Utilities::Log(const char *fmt, ...)
-{
-	if (!fmt) return; //if the passed string is null return
-	if (strlen(fmt) < 2) return;
-
-	//Set up va_list and buffer to hold the params 
-	va_list va_alist;
-	char logBuf[256] = { 0 };
-
-	//Do sprintf with the parameters
-	va_start(va_alist, fmt);
-	_vsnprintf(logBuf + strlen(logBuf), sizeof(logBuf) - strlen(logBuf), fmt, va_alist);
-	va_end(va_alist);
-
-	//Output to console
-	if (logBuf[0] != '\0')
-	{
-		SetConsoleColor(FOREGROUND_INTENSE_GREEN);
-		printf("[%s]", GetTimeString().c_str());
-		SetConsoleColor(FOREGROUND_WHITE);
-		printf(": %s\n", logBuf);
-	}
-
-	if (FileLog)
-	{
-		logFile << logBuf << std::endl;
-	}
-}
-
-*/
-
 // Gets the current time as a string
 std::string Utilities::GetTimeString()
 {
@@ -75,24 +24,6 @@ std::string Utilities::GetTimeString()
 	strftime(timeString, sizeof(timeString), "%I:%M%p", time_info);
 	return timeString;
 }
-
-/*
-// Sets the console color for upcoming text
-void Utilities::SetConsoleColor(WORD color)
-{
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
-
-// Enables writing all log calls to a file
-void Utilities::EnableLogFile(std::string filename)
-{
-	logFile.open(filename.c_str());
-	if (logFile.is_open())
-		FileLog = true;
-}
-
-*/
-
 
 // --------         Utilities Memory           ------------ //
 

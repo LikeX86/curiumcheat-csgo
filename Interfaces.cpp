@@ -70,8 +70,6 @@ void Interfaces::Initialise()
 
 	PDWORD pdwClientVMT = *(PDWORD*)Client;
 	pInput = *(CInput**)((*(DWORD**)Client)[15] + 0x1);
-
-	Utilities::Log("Interfaces Ready");
 }
 
 // Namespace to contain all the valve interfaces
