@@ -195,7 +195,7 @@
     <ClInclude Include="Resolver.h">
       <Filter>Header Files\Hacks</Filter>
     </ClInclude>
-    <ClInclude Include="ESPJunk.h">
+    <ClInclude Include="JunkCode.h">
       <Filter>Header Files\Junkcode</Filter>
     </ClInclude>
   </ItemGroup>
