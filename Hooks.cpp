@@ -666,14 +666,10 @@ void __fastcall Hooked_OverrideView(void* ecx, void* edx, CViewSetup* pSetup)
 	if (Interfaces::Engine->IsConnected() && Interfaces::Engine->IsInGame())
 	{
 		if (Menu::Window.VisualsTab.Active.GetState() && pLocal->IsAlive() && !pLocal->IsScoped())
-		{
 			if (pSetup->fov = 90)
 				pSetup->fov = Menu::Window.VisualsTab.OtherFOV.GetValue();
-		}
-
 		oOverrideView(ecx, edx, pSetup);
 	}
-
 }
 
 void GetViewModelFOV(float& fov)

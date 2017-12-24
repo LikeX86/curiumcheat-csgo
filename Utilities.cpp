@@ -8,23 +8,6 @@
 bool FileLog = false;
 std::ofstream logFile;
 
-// Gets the current time as a string
-std::string Utilities::GetTimeString()
-{
-	//Time related variables
-	time_t current_time;
-	struct tm *time_info;
-	static char timeString[10];
-
-	//Get current time
-	time(&current_time);
-	time_info = localtime(&current_time);
-
-	//Get current time as string
-	strftime(timeString, sizeof(timeString), "%I:%M%p", time_info);
-	return timeString;
-}
-
 // --------         Utilities Memory           ------------ //
 
 DWORD Utilities::Memory::WaitOnModuleHandle(std::string moduleName)
@@ -42,12 +25,7 @@ DWORD Utilities::Memory::WaitOnModuleHandle(std::string moduleName)
 bool bCompare(const BYTE* Data, const BYTE* Mask, const char* szMask)
 {
 	for (; *szMask; ++szMask, ++Mask, ++Data)
-	{
-		if (*szMask == 'x' && *Mask != *Data)
-		{
-			return false;
-		}
-	}
+		if (*szMask == 'x' && *Mask != *Data) return false;
 	return (*szMask) == 0;
 }
 
@@ -57,12 +35,7 @@ DWORD Utilities::Memory::FindPattern(std::string moduleName, BYTE* Mask, char* s
 	MODULEINFO ModInfo; GetModuleInformation(GetCurrentProcess(), (HMODULE)Address, &ModInfo, sizeof(MODULEINFO));
 	DWORD Length = ModInfo.SizeOfImage;
 	for (DWORD c = 0; c < Length; c += 1)
-	{
-		if (bCompare((BYTE*)(Address + c), Mask, szMask))
-		{
-			return (DWORD)(Address + c);
-		}
-	}
+		if (bCompare((BYTE*)(Address + c), Mask, szMask)) return (DWORD)(Address + c);
 	return 0;
 }
 
@@ -75,18 +48,11 @@ DWORD Utilities::Memory::FindTextPattern(std::string moduleName, char* string)
 	int len = strlen(string);
 	char* szMask = new char[len + 1];
 	for (int i = 0; i < len; i++)
-	{
 		szMask[i] = 'x';
-	}
 	szMask[len] = '\0';
 
 	for (DWORD c = 0; c < Length; c += 1)
-	{
-		if (bCompare((BYTE*)(Address + c), (BYTE*)string, szMask))
-		{
-			return (DWORD)(Address + c);
-		}
-	}
+		if (bCompare((BYTE*)(Address + c), (BYTE*)string, szMask)) return (DWORD)(Address + c);
 	return 0;
 }
 

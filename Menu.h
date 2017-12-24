@@ -199,12 +199,6 @@ public:
 	CSlider	  FakeLagSend;
 	CCheckBox ChokeRandomize;
 	CCheckBox SendRandomize;
-	//CCheckBox FakeLagWhileShooting;
-
-	// Teleport shit cause we're cool
-	//CGroupBox TeleportGroup;
-	//CCheckBox TeleportEnable;
-	//CKeyBind  TeleportKey;
 };
 
 class AyyWareWindow : public CWindow
