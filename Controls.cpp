@@ -474,10 +474,7 @@ void CComboBox::OnUpdate()
 			IsOpen = false;
 	}
 	else
-	{
 		m_iHeight = 16;
-	}
-
 }
 
 void CComboBox::OnClick()

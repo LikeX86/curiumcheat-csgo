@@ -1,3 +1,6 @@
+// Junk code
+#include "JunkCode.h"
+
 // General shit
 #include "DLLMain.h"
 #include "Utilities.h"
@@ -56,8 +59,29 @@ int InitialThread()
 	Utilities::Log("Ready");
 
 	// While our cheat is running
+	// Junk code every 1 sec
 	while (DoUnload == false)
 	{
+		JYSIfQLKR();
+		xeQ();
+		PqeUmP();
+		WjPAEdFW();
+		aYKa();
+		ggGxhBRj();
+		BxLinopzQ();
+		qEOiVyVfb();
+		KEeesJJ();
+		oAx();
+		ofmLCa();
+		TtiwOmL();
+		jxagnz();
+		BfHX();
+		CDWTjNgao();
+		MLQeU();
+		XGecApmcy();
+		jNmPTfkz();
+		FNonWgoZc();
+		NRqzS();
 		Sleep(1000);
 	}
 

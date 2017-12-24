@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #pragma once
 
 // It's actually in DLLMain but w/e

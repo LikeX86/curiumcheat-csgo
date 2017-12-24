@@ -547,9 +547,7 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 			}
 		}
 		else if (!Menu::Window.MiscTab.OtherThirdperson.GetState())
-		{
 			rekt1 = false;
-		}
 
 		static bool rekt = false;
 		if (!Menu::Window.MiscTab.OtherThirdperson.GetState() || pLocal->IsAlive() == 0 || pLocal->IsScoped())
@@ -561,9 +559,7 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 			}
 		}
 		else if (Menu::Window.MiscTab.OtherThirdperson.GetState() || pLocal->IsAlive() || pLocal->IsScoped() == 0)
-		{
 			rekt = false;
-		}
 
 		static bool meme = false;
 		if (Menu::Window.MiscTab.OtherThirdperson.GetState() && pLocal->IsScoped() == 0)
@@ -575,9 +571,7 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 			}
 		}
 		else if (pLocal->IsScoped())
-		{
 			meme = false;
-		}
 
 		static bool kek = false;
 		if (Menu::Window.MiscTab.OtherThirdperson.GetState() && pLocal->IsAlive())
@@ -589,9 +583,7 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 			}
 		}
 		else if (pLocal->IsAlive() == 0)
-		{
 			kek = false;
-		}
 	}
 
 	if (Interfaces::Engine->IsConnected() && Interfaces::Engine->IsInGame() && curStage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)

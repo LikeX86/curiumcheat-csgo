@@ -1,8 +1,6 @@
 #include "ESP.h"
 #include "Interfaces.h"
 #include "RenderManager.h"
-// Junk code
-#include "ESPJunk.h"
 
 void CEsp::Init()
 {
@@ -14,18 +12,6 @@ void CEsp::Move(CUserCmd *pCmd, bool &bSendPacket) {}
 // Main ESP Drawing loop
 void CEsp::Draw()
 {
-	// Junk functions
-	SDMZZpSzSGYbCsFtBHiAbqVBDqa();
-	dip();
-	tfkwJiTQdBdHQPcghsZjQgAyXZ();
-	BBhMDubfu();
-	RmAXMnZiBTRj();
-	saCUTPGFYgPSSgqgcgmPTYBAN();
-	RQaAWSQeOFpmoGoboDbN();
-	KQHpunOGlMXDh();
-	aBMVIbTMZiRJsiFtblT();
-	TPCdKBybkLdiXhfItuo();
-
 	IClientEntity *pLocal = hackManager.pLocal();
 
 	if (Menu::Window.MiscTab.OtherSpectators.GetState())
@@ -90,17 +76,6 @@ void CEsp::Draw()
 		DWORD m_flFlashMaxAlpha = NetVar.GetNetVar(0xFE79FB98);
 		*(float*)((DWORD)pLocal + m_flFlashMaxAlpha) = 0;
 	}
-
-	wDtmfR();
-	PfjXpozmbhtRnBgO();
-	LARDfRUFcADDOWuNLtjpp();
-	DttkaaHU();
-	xmLwJbyq();
-	dEtptiSB();
-	qGIQfedaeGdpzd();
-	PFQfomCMjGkcIAKXPxV();
-	LGFITPWDwTfFMHcLcczDAshTUcBRo();
-	nlJVFgXoHSMYsuwidHHm();
 }
 
 void CEsp::SpecList()

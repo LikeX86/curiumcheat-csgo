@@ -9,10 +9,7 @@
 
 CGUI GUI;
 
-CGUI::CGUI()
-{
-
-}
+CGUI::CGUI() { }
 
 // Draws all windows 
 void CGUI::Draw()
@@ -359,8 +356,6 @@ bool CGUI::DrawWindow(CWindow* window)
 		}
 
 	}
-
-
 	return true;
 }
 
