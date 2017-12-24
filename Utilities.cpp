@@ -1,6 +1,3 @@
-/*
-Syn's AyyWare Framework
-*/
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
 
@@ -159,7 +156,7 @@ DWORD Utilities::Memory::FindTextPattern(std::string moduleName, char* string)
 
 // --------         Utilities Memory VMT Manager       ------------ //
 
-bool	Utilities::Memory::VMTManager::Initialise(DWORD* InstancePointer)
+bool Utilities::Memory::VMTManager::Initialise(DWORD* InstancePointer)
 {
 	// Store the instance pointers and such, and work out how big the table is
 	Instance = InstancePointer;
@@ -179,24 +176,21 @@ bool	Utilities::Memory::VMTManager::Initialise(DWORD* InstancePointer)
 	return true;
 }
 
-int		Utilities::Memory::VMTManager::MethodCount(DWORD* InstancePointer)
+int Utilities::Memory::VMTManager::MethodCount(DWORD* InstancePointer)
 {
 	DWORD *VMT = (DWORD*)*InstancePointer;
 	int Index = 0;
 	int Amount = 0;
 	while (!IsBadCodePtr((FARPROC)VMT[Index]))
-	{
 		if (!IsBadCodePtr((FARPROC)VMT[Index]))
 		{
 			Amount++;
 			Index++;
 		}
-	}
-
 	return Amount;
 }
 
-DWORD	Utilities::Memory::VMTManager::HookMethod(DWORD NewFunction, int Index)
+DWORD Utilities::Memory::VMTManager::HookMethod(DWORD NewFunction, int Index)
 {
 	if (initComplete)
 	{
@@ -207,32 +201,28 @@ DWORD	Utilities::Memory::VMTManager::HookMethod(DWORD NewFunction, int Index)
 		return NULL;
 }
 
-void	Utilities::Memory::VMTManager::UnhookMethod(int Index)
+void Utilities::Memory::VMTManager::UnhookMethod(int Index)
 {
 	if (initComplete)
 		CustomTable[Index] = OriginalTable[Index];
 	return;
 }
 
-void	Utilities::Memory::VMTManager::RestoreOriginal()
+void Utilities::Memory::VMTManager::RestoreOriginal()
 {
 	if (initComplete)
-	{
 		*Instance = (DWORD)OriginalTable;
-	}
 	return;
 }
 
-void	Utilities::Memory::VMTManager::RestoreCustom()
+void Utilities::Memory::VMTManager::RestoreCustom()
 {
 	if (initComplete)
-	{
 		*Instance = (DWORD)CustomTable;
-	}
 	return;
 }
 
-DWORD	Utilities::Memory::VMTManager::GetOriginalFunction(int Index)
+DWORD Utilities::Memory::VMTManager::GetOriginalFunction(int Index)
 {
 	return OriginalTable[Index];
 }
