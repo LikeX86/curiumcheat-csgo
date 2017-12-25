@@ -2,7 +2,6 @@
 #include "JunkCode.h"
 
 // General shit
-#include "DLLMain.h"
 #include "Utilities.h"
 
 // Injection stuff
@@ -17,7 +16,6 @@
 #include "Menu.h"
 #include "AntiAntiAim.h"
 
-#include "Dumping.h"
 
 // Used as part of the reflective DLL injection
 extern HINSTANCE hAppInstance;
@@ -32,11 +30,6 @@ bool DoUnload;
 
 int InitialThread()
 {
-#ifdef AYY_DEBUG
-	Utilities::OpenConsole("AyyWare");
-#endif
-
-	//---------------------------------------------------------
 	// Initialise all our shit
 	Offsets::Initialise(); // Set our VMT offsets and do any pattern scans
 	Interfaces::Initialise(); // Get pointers to the valve classes
@@ -48,35 +41,30 @@ int InitialThread()
 	Hooks::Initialise();
 	ApplyAAAHooks();
 
-	//GUI.LoadWindowState(&Menu::Window, "config.xml");
-
-	// Dumping
-	//Dump::DumpClassIds();
-
 	// While our cheat is running
 	// Junk code every 1 sec
 	while (DoUnload == false)
 	{
-		JYSIfQLKR();
-		xeQ();
-		PqeUmP();
-		WjPAEdFW();
-		aYKa();
-		ggGxhBRj();
-		BxLinopzQ();
-		qEOiVyVfb();
-		KEeesJJ();
-		oAx();
-		ofmLCa();
-		TtiwOmL();
-		jxagnz();
-		BfHX();
-		CDWTjNgao();
-		MLQeU();
-		XGecApmcy();
-		jNmPTfkz();
-		FNonWgoZc();
-		NRqzS();
+		TEID();
+		LWwW();
+		XBU();
+		KUR();
+		kEj();
+		fHV();
+		cgw();
+		GCli();
+		kKA();
+		nzET();
+		iKE();
+		tSZ();
+		oUxf();
+		ZVh();
+		liRD();
+		PNu();
+		lgU();
+		QoAR();
+		VnaB();
+		GUCc();
 		Sleep(1000);
 	}
 

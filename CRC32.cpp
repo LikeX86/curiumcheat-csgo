@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #include "CRC32.h"
 
 unsigned int uiCRC32_Table[256] = {

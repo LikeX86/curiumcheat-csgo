@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #include "UTIL Functions.h"
 #include "Utilities.h"
 #include "Menu.h"

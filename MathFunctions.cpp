@@ -1,7 +1,3 @@
-/*
-Syn's AyyWare Framework 2015
-*/
-
 #include "MathFunctions.h"
 #include "CommonIncludes.h"
 

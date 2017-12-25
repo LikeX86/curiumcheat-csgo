@@ -1,5 +1,4 @@
 #include "AutoWall.h"
-// Don't take credits for this ;) Joplin / Manhhao are the first uploaders ;)
 
 #define    HITGROUP_GENERIC    0
 #define    HITGROUP_HEAD        1

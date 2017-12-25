@@ -1,5 +1,3 @@
-
-
 // Credits to Valve and Shad0w
 
 #include "NetVars.h"

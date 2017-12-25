@@ -131,8 +131,6 @@
     <ClInclude Include="CommonIncludes.h" />
     <ClInclude Include="Controls.h" />
     <ClInclude Include="CRC32.h" />
-    <ClInclude Include="DLLMain.h" />
-    <ClInclude Include="Dumping.h" />
     <ClInclude Include="EngineClient.h" />
     <ClInclude Include="Entities.h" />
     <ClInclude Include="ESP.h" />
@@ -172,7 +170,6 @@
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="CRC32.cpp" />
     <ClCompile Include="DLLMain.cpp" />
-    <ClCompile Include="Dumping.cpp" />
     <ClCompile Include="ESP.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Hacks.cpp" />

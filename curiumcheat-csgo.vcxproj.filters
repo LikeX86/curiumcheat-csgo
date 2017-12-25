@@ -69,9 +69,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DLLMain.h">
-      <Filter>Header Files\Backend</Filter>
-    </ClInclude>
     <ClInclude Include="INJ\ReflectiveDLLInjection.h">
       <Filter>Header Files\Injection</Filter>
     </ClInclude>
@@ -165,9 +162,6 @@
     <ClInclude Include="Chams.h">
       <Filter>Header Files\Hacks</Filter>
     </ClInclude>
-    <ClInclude Include="Dumping.h">
-      <Filter>Header Files\Source Engine</Filter>
-    </ClInclude>
     <ClInclude Include="RageBot.h">
       <Filter>Header Files\Hacks</Filter>
     </ClInclude>
@@ -256,9 +250,6 @@
     </ClCompile>
     <ClCompile Include="Chams.cpp">
       <Filter>Source Files\Hacks</Filter>
-    </ClCompile>
-    <ClCompile Include="Dumping.cpp">
-      <Filter>Source Files\Source Engine</Filter>
     </ClCompile>
     <ClCompile Include="MiscHacks.cpp">
       <Filter>Source Files\Hacks</Filter>

@@ -1,5 +1,3 @@
-// Don't take credits for this ;) Joplin / Manhhao are the first uploaders ;)
-
 // Credits to Valve and Shad0w
 #include "Interfaces.h"
 #include "Menu.h"
@@ -62,9 +60,7 @@ void FixY(const CRecvProxyData *pData, void *pStruct, void *pOut)
 				bSpinbot = true;
 			}
 			else
-			{
 				bShotLastTime[((IClientEntity*)(pStruct))->GetIndex()] = false;
-			}
 		}
 
 		vLast[((IClientEntity*)(pStruct))->GetIndex()].y = flYaw;
@@ -75,12 +71,9 @@ void FixY(const CRecvProxyData *pData, void *pStruct, void *pOut)
 		bJitterFix[((IClientEntity*)(pStruct))->GetIndex()] = (flYaw >= 180.0f && flYaw <= 360.0f);
 
 		if (bTmp && (flYaw >= 0.0f && flYaw <= 180.0f))
-		{
 			flYaw += 359.0f;
-		}
 		break;
 	}
-
 	*(float*)(pOut) = flYaw;
 }
 
@@ -171,15 +164,11 @@ void ApplyAAAHooks()
 
 				// Pitch Fix
 				if (!strcmp(name, "m_angEyeAngles[0]"))
-				{
 					pProp->m_ProxyFn = FixX;
-				}
 
 				// Yaw Fix
 				if (!strcmp(name, "m_angEyeAngles[1]"))
-				{
 					pProp->m_ProxyFn = FixY;
-				}
 			}
 		}
 		else if (!strcmp(pszName, "DT_BaseViewModel"))

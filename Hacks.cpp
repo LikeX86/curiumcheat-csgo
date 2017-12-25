@@ -42,18 +42,12 @@ void Hacks::DrawHacks()
 
 	void Hooked__PlaySoundCSGO(const char* fileName);
 
-	// Spectator List
-	/*if (Menu::Window.MiscTab.OtherSpectators.GetState())
-		SpecList();*/
-
 	// Check the master visuals switch, just to be sure
 	if (!Menu::Window.VisualsTab.Active.GetState())
 		return;
 
 	if (Menu::Window.VisualsTab.OptionsCompRank.GetState() && GUI.GetKeyState(VK_TAB))
-	{
 		GameUtils::ServerRankRevealAll();
-	}
 
 	hackManager.Draw();
 	//--------------------------------
@@ -71,12 +65,8 @@ void Hacks::MoveHacks(CUserCmd *pCmd,bool &bSendPacket)
 	// Put it in here so it's applied AFTER the aimbot
 	int AirStuckKey = Menu::Window.MiscTab.OtherAirStuck.GetKey();
 	if (AirStuckKey > 0 && GUI.GetKeyState(AirStuckKey))
-	{
 		if (!(pCmd->buttons & IN_ATTACK))
-		{
 			pCmd->tick_count = INT_MAX;//0xFFFFF or 16777216
-		}
-	}
 }
 
 //---------------------------------------------------------------------//
@@ -92,33 +82,27 @@ void HackManager::RegisterHack(CHack* hake)
 // Draw all the hakes
 void HackManager::Draw()
 {
-	if (!IsReady)
-		return;
+	if (!IsReady) return;
 
 	// Grab the local player for drawing related hacks
 	pLocalInstance = Interfaces::EntList->GetClientEntity(Interfaces::Engine->GetLocalPlayer());
 	if (!pLocalInstance) return;
 
 	for (auto &hack : Hacks)
-	{
 		hack->Draw();
-	}
 }
 
 // Handle all the move hakes
 void HackManager::Move(CUserCmd *pCmd,bool &bSendPacket)
 {
-	if (!IsReady)
-		return;
+	if (!IsReady) return;
 
 	// Grab the local player for move related hacks
 	pLocalInstance = Interfaces::EntList->GetClientEntity(Interfaces::Engine->GetLocalPlayer());
 	if (!pLocalInstance) return;
 
 	for (auto &hack : Hacks)
-	{
-		hack->Move(pCmd,bSendPacket); // 
-	}
+		hack->Move(pCmd,bSendPacket);
 }
 
 //---------------------------------------------------------------------//
