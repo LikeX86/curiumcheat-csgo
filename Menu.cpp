@@ -35,7 +35,7 @@ void AyyWareWindow::Setup()
 {
 	SetPosition(350, 50);
 	SetSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	SetTitle("Whip");
+	SetTitle("Curium");
 
 	RegisterTab(&RageBotTab);
 	RegisterTab(&LegitBotTab);

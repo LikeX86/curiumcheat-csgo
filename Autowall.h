@@ -1,9 +1,6 @@
 #pragma once
 
 #include "Interfaces.h"
-
-#pragma once
-
 #include "Hacks.h"
 
 struct FireBulletData
