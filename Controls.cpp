@@ -77,13 +77,9 @@ void CCheckBox::Draw(bool hover)
 	if (hover)
 	{
 		if (Checked)
-		{
 			Render::Clear(a.x + 2, a.y + 2, 9, 9, Color(120, 0, 0, 255));
-		}
 		else
-		{
 			Render::Clear(a.x + 2, a.y + 2, 9, 9, Color(129, 129, 129, 255));
-		}
 		Render::Outline(a.x + 2, a.y + 2, 9, 9, Color(20, 20, 20, 80));
 	}
 	else if (Checked)
@@ -93,7 +89,7 @@ void CCheckBox::Draw(bool hover)
 	}
 }
 
-void CCheckBox::OnUpdate() { m_iWidth = 13; 	m_iHeight = 13; }
+void CCheckBox::OnUpdate() { m_iWidth = 13; m_iHeight = 13; }
 
 void CCheckBox::OnClick()
 {
@@ -220,19 +216,16 @@ void CSlider::OnUpdate() {
 			Value = Min + (Max - Min)*Ratio;
 		}
 		else
-		{
 			DoDrag = false;
-		}
 	}
 }
 
-void CSlider::OnClick() {
+void CSlider::OnClick()
+{
 	POINT a = GetAbsolutePos();
 	RECT SliderRegion = { a.x, a.y, m_iWidth, 11 };
 	if (GUI.IsMouseInRegion(SliderRegion))
-	{
 		DoDrag = true;
-	}
 }
 
 float CSlider::GetValue()
@@ -289,9 +282,7 @@ void CKeyBind::Draw(bool hover)
 	char* KeyName = "Not Bound";
 
 	if (IsGettingKey)
-	{
 		KeyName = "<Press A Key>";
-	}
 	else
 	{
 		if (Key >= 0)
@@ -312,20 +303,16 @@ void CKeyBind::Draw(bool hover)
 		}
 
 		if (!GoodKeyName)
-		{
 			KeyName = "No Key Bound";
-		}
 	}
-
-
 	Render::Text(a.x + 2, a.y + 2, Color(255, 255, 255, 255), Render::Fonts::MenuBold, KeyName);
 }
 
-void CKeyBind::OnUpdate() {
+void CKeyBind::OnUpdate()
+{
 	m_iHeight = 16;
 	POINT a = GetAbsolutePos();
 	if (IsGettingKey)
-	{
 		for (int i = 0; i < 255; i++)
 		{
 			if (GUI.GetKeyPress(i))
@@ -342,15 +329,13 @@ void CKeyBind::OnUpdate() {
 				return;
 			}
 		}
-	}
 }
 
-void CKeyBind::OnClick() {
+void CKeyBind::OnClick()
+{
 	POINT a = GetAbsolutePos();
 	if (!IsGettingKey)
-	{
 		IsGettingKey = true;
-	}
 }
 
 int CKeyBind::GetKey()
@@ -448,9 +433,7 @@ void CComboBox::Draw(bool hover)
 
 				// Hover
 				if (GUI.IsMouseInRegion(ItemRegion))
-				{
 					Render::Clear(a.x, a.y + 17 + i * 16, m_iWidth, 16, Color(207, 207, 207, 255));
-				}
 
 				Render::Text(a.x + 2, a.y + 19 + i * 16, Color(255, 255, 255, 255), Render::Fonts::MenuBold, Items[i].c_str());
 			}
@@ -494,9 +477,7 @@ void CComboBox::OnClick()
 
 				// Hover
 				if (GUI.IsMouseInRegion(ItemRegion))
-				{
 					SelectedIndex = i;
-				}
 			}
 		}
 
@@ -504,9 +485,7 @@ void CComboBox::OnClick()
 		IsOpen = false;
 	}
 	else
-	{
 		IsOpen = true;
-	}
 }
 
 int CComboBox::GetIndex()
@@ -517,9 +496,7 @@ int CComboBox::GetIndex()
 std::string CComboBox::GetItem()
 {
 	if (SelectedIndex >= 0 && SelectedIndex < Items.size())
-	{
 		return Items[SelectedIndex];
-	}
 
 	return "Error";
 }
@@ -527,9 +504,7 @@ std::string CComboBox::GetItem()
 void CComboBox::SelectIndex(int idx)
 {
 	if (idx >= 0 && idx < Items.size())
-	{
 		SelectedIndex = idx;
-	}
 }
 
 #pragma endregion Implementations of the ComboBox functions

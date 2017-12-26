@@ -134,9 +134,7 @@ void CMiscHacks::AutoJump(CUserCmd *pCmd)
 			pCmd->buttons &= ~IN_JUMP;
 
 		if (hackManager.pLocal()->GetVelocity().Length() <= 50)
-		{
 			pCmd->forwardmove = 450.f;
-		}
 	}
 }
 
@@ -148,13 +146,9 @@ void CMiscHacks::LegitStrafe(CUserCmd *pCmd)
 		pCmd->forwardmove = 0.0f;
 
 		if (pCmd->mousedx < 0)
-		{
 			pCmd->sidemove = -450.0f;
-		}
 		else if (pCmd->mousedx > 0)
-		{
 			pCmd->sidemove = 450.0f;
-		}
 	}
 }
 
@@ -167,10 +161,10 @@ void CMiscHacks::RageStrafe(CUserCmd *pCmd)
 
 	if ((GetAsyncKeyState(VK_SPACE) && !(pLocal->GetFlags() & FL_ONGROUND)) && bKeysPressed)
 	{
-		if (pCmd->mousedx > 1 || pCmd->mousedx < -1) {
+		if (pCmd->mousedx > 1 || pCmd->mousedx < -1)
 			pCmd->sidemove = pCmd->mousedx < 0.f ? -450.f : 450.f;
-		}
-		else {
+		else
+		{
 			pCmd->forwardmove = (1800.f * 4.f) / pLocal->GetVelocity().Length2D();
 			pCmd->sidemove = (pCmd->command_number % 2) == 0 ? -450.f : 450.f;
 			if (pCmd->forwardmove > 450.f)
@@ -207,7 +201,6 @@ void CMiscHacks::ChatSpamInterwebz()
 			useSpace = !useSpace;
 		}
 	}
-
 	start_t = clock();
 }
 
@@ -221,9 +214,7 @@ void CMiscHacks::ChatSpamDisperseName()
 	static bool wasSpamming = true;
 
 	if (wasSpamming)
-	{
 		change_name("\n…e…e…e\n");
-	}
 
 	start_t = clock();
 }
@@ -232,8 +223,7 @@ void CMiscHacks::ChatSpamName()
 {
 	static clock_t start_t = clock();
 	double timeSoFar = (double)(clock() - start_t) / CLOCKS_PER_SEC;
-	if (timeSoFar < 0.001)
-		return;
+	if (timeSoFar < 0.001) return;
 
 	std::vector < std::string > Names;
 
@@ -250,13 +240,9 @@ void CMiscHacks::ChatSpamName()
 
 			// If entity is a player
 			if (cClass->m_ClassID == (int)CSGOClassID::CCSPlayer)
-			{
 				if (Interfaces::Engine->GetPlayerInfo(i, &pInfo))
-				{
 					if (!strstr(pInfo.name, "GOTV"))
 						Names.push_back(pInfo.name);
-				}
-			}
 		}
 	}
 
@@ -267,13 +253,9 @@ void CMiscHacks::ChatSpamName()
 	sprintf_s(buffer, "%s ", Names[randomIndex].c_str());
 
 	if (wasSpamming)
-	{
 		change_name(buffer);
-	}
 	else
-	{
 		change_name ("p$i 1337");
-	}
 
 	start_t = clock();
 }
@@ -290,13 +272,9 @@ void CMiscHacks::ChatSpamRegular()
 	static bool holzed = true;
 
 	if (Menu::Window.MiscTab.OtherTeamChat.GetState())
-	{
 		SayInTeamChat("EZ");
-	}
 	else
-	{
 		SayInChat("EZ");
-	}
 
 	start_t = clock();
 }
@@ -309,9 +287,7 @@ void CMiscHacks::Fakelag(CUserCmd *pCmd, bool &bSendPacket)
 	iFakeLag++;
 
 	if (iFakeLag <= iChoke && iFakeLag > -1)
-	{
 		bSendPacket = false;
-	}
 	else
 	{
 		bSendPacket = true;

@@ -94,15 +94,6 @@ bool TraceToExit(Vector& end, trace_t& tr, Vector start, Vector vEnd, trace_t* t
 	return TraceToExit(end, tr, start.x, start.y, start.z, vEnd.x, vEnd.y, vEnd.z, trace);
 }
 
-/*unsigned short GameUtils::UTIL_GetAchievementEventMask()
-{
-	static uintptr_t GetAchievementEventMask_func = Utilities::Memory::FindPattern("client.dll", (PBYTE)"\x55\x8B\xEC\x81\xEC\x00\x00\x00\x00\x8B\x0D\x00\x00\x00\x00\x68\x00\x00\x00\x00", "xxxxx????xx????x????");
-	typedef unsigned short(__fastcall* UTIL_GetAchievementEventMask_t)();
-	static UTIL_GetAchievementEventMask_t pUTIL_GetAchievementEventMask =
-		reinterpret_cast<UTIL_GetAchievementEventMask_t>(GetAchievementEventMask_func);
-	return pUTIL_GetAchievementEventMask();
-}*/
-
 void GameUtils::NormaliseViewAngle(Vector &angle)
 {
 	if (!Menu::Window.MiscTab.OtherSafeMode.GetState())
@@ -126,12 +117,7 @@ void GameUtils::NormaliseViewAngle(Vector &angle)
 	}
 }
 
-void GameUtils::CL_FixMove(CUserCmd* pCmd, Vector viewangles)
-{
-	/*pCmd->forwardmove = DotProduct(forward * vForwardNorm, aimforward) + DotProduct(right * vRightNorm, aimforward) + DotProduct(up * vUpNorm, aimforward);
-	pCmd->sidemove = DotProduct(forward * vForwardNorm, aimright) + DotProduct(right * vRightNorm, aimright) + DotProduct(up * vUpNorm, aimright);
-	pCmd->upmove = DotProduct(forward * vForwardNorm, aimup) + DotProduct(right * vRightNorm, aimup) + DotProduct(up * vUpNorm, aimup);*/
-}
+void GameUtils::CL_FixMove(CUserCmd* pCmd, Vector viewangles) {}
 
 char shit[16];
 trace_t Trace;
@@ -150,18 +136,11 @@ bool GameUtils::IsVisible(IClientEntity* pLocal, IClientEntity* pEntity, int Bon
 	//Interfaces::Trace->TraceRay(Ray,MASK_SOLID, NULL/*&filter*/, &Trace);
 	UTIL_TraceLine(start, end, MASK_SOLID, pLocal, 0, &Trace);
 
-	if (Trace.m_pEnt == entCopy)
-	{
-		return true;
-	}
+	if (Trace.m_pEnt == entCopy) return true;
 
-	if (Trace.fraction == 1.0f)
-	{
-		return true;
-	}
+	if (Trace.fraction == 1.0f) return true;
 
 	return false;
-
 }
 
 bool GameUtils::IsBallisticWeapon(void* weapon)
@@ -239,240 +218,6 @@ Vector GetHitboxPosition(IClientEntity* pEntity, int Hitbox)
 	return Vector(0, 0, 0);
 }
 
-
-/*bool GetBestPoint(IClientEntity* pEntity, Hitbox* hitbox, BestPoint *point)
-{
-	Vector center = hitbox->points[0];
-	std::vector<int> HitBoxesToScan;
-
-	if (hitbox->hitbox == ((int)CSGOHitboxID::Head))
-	{
-		Vector high = ((hitbox->points[3] + hitbox->points[5]) * .5f);
-
-		float pitch = pEntity->GetEyeAngles().x;
-		if ((pitch > 0.f) && (pitch <= 89.f))
-		{
-			Vector height = (((high - hitbox->points[0]) / 3) * 4);
-			Vector new_height = (hitbox->points[0] + (height * (pitch / 89.f)));
-
-			hitbox->points[0] = new_height;
-			point->flags |= FL_HIGH;
-		}
-		else if ((pitch < 292.5f) && (pitch >= 271.f))
-		{
-			hitbox->points[0] -= Vector(0.f, 0.f, 1.f);
-		point->flags |= FL_LOW;
-		}
-	}
-
-	for (int index = 0; index <= 8; ++index)
-	{
-		int temp_damage = GetDamage(hitbox->points[index]);
-
-		if ((point->dmg < temp_damage))
-		{
-			point->dmg = temp_damage;
-			point->point = hitbox->points[index];
-			point->index = index;
-		}
-	}
-
-	return (point->dmg > Menu::Window.RageBotTab.AccuracyMinimumDamage.GetValue());
-}*/
-
-/*Vector GetHitboxPosition(IClientEntity* pEntity, int Hitbox)
-{
-	matrix3x4 matrix[128];
-
-	if (pEntity->SetupBones(matrix, 128, 0x00000100, GetTickCount64()))
-	{
-		studiohdr_t* hdr = Interfaces::ModelInfo->GetStudiomodel(pEntity->GetModel());
-		mstudiohitboxset_t* set = hdr->GetHitboxSet(0);
-
-		mstudiobbox_t* hitbox = set->GetHitbox(Hitbox);
-
-		if (hitbox)
-		{	
-			Vector points[9] =
-			{
-				((hitbox->bbmin + hitbox->bbmax) * .5f),
-				Vector(hitbox->bbmin.x, hitbox->bbmin.y, hitbox->bbmin.z),
-				Vector(hitbox->bbmin.x, hitbox->bbmax.y, hitbox->bbmin.z),
-				Vector(hitbox->bbmax.x, hitbox->bbmax.y, hitbox->bbmin.z),
-				Vector(hitbox->bbmax.x, hitbox->bbmin.y, hitbox->bbmin.z),
-				Vector(hitbox->bbmax.x, hitbox->bbmax.y, hitbox->bbmax.z),
-				Vector(hitbox->bbmin.x, hitbox->bbmax.y, hitbox->bbmax.z),
-				Vector(hitbox->bbmin.x, hitbox->bbmin.y, hitbox->bbmax.z),
-				Vector(hitbox->bbmax.x, hitbox->bbmin.y, hitbox->bbmax.z)
-			};
-
-			Vector vPoint = ((hitbox->bbmin + hitbox->bbmax) * .5f);
-
-			for (int index = 0; index <= 8; ++index)
-			{
-				if (index != 0)
-				{
-					// scale down the hitbox size
-					points[index] = ((((points[index] + points[0]) * .5f) + points[index]) * .5f);
-				}
-
-				// transform the vector
-				VectorTransform(points[index], matrix[hitbox->bone], vPoint[index]);
-			}
-
-			return vPoint;
-		}
-	}
-
-	return Vector(0, 0, 0);
-}*/
-
-/*Vector GetHitboxPosition(IClientEntity* pEntity, int Hitbox)
-{
-	matrix3x4 matrix[128];
-
-	if (pEntity->SetupBones(matrix, 128, 0x00000100, GetTickCount64()))
-	{
-		studiohdr_t* hdr = Interfaces::ModelInfo->GetStudiomodel(pEntity->GetModel());
-		mstudiohitboxset_t* set = hdr->GetHitboxSet(0);
-
-		mstudiobbox_t* hitbox = set->GetHitbox(Hitbox);
-
-		if (hitbox)
-		{
-			Vector vMin, vMax, vCenter, sCenter;
-			VectorTransform(hitbox->bbmin, matrix[hitbox->bone], vMin);
-			VectorTransform(hitbox->bbmax, matrix[hitbox->bone], vMax);
-			vCenter = (vMin + vMax) *0.5f;
-			return vCenter;
-		}
-	}
-
-	return Vector(0, 0, 0);
-}*/
-
-/*Vector GetHitboxPosition(IClientEntity* pEntity, int Hitbox)
-{
-	matrix3x4 matrix[128];
-
-	if (!pEntity->SetupBones(matrix, 128, 0x00000100, GetTickCount64()))
-		return Vector(0,0,0);
-
-	studiohdr_t* hdr = Interfaces::ModelInfo->GetStudiomodel(pEntity->GetModel());
-	mstudiohitboxset_t* set = hdr->GetHitboxSet(0);
-
-	mstudiobbox_t* hitbox = set->GetHitbox(Hitbox);
-
-	if (!hitbox)
-		return Vector(0,0,0);
-
-	Vector vMin, vMax, vCenter, sCenter;
-	VectorTransform(hitbox->bbmin, matrix[hitbox->bone], vMin);
-	VectorTransform(hitbox->bbmax, matrix[hitbox->bone], vMax);
-	vCenter = (vMin + vMax) *0.5f;
-	return vCenter;
-}*/
-
-/*bool CRageBot::GetHitbox(CBaseEntity* target, Hitbox* hitbox)
-{
-	matrix3x4a_t matrix[MAXSTUDIOBONES];
-
-	if (!target->SetupBones(matrix, MAXSTUDIOBONES, BONE_USED_BY_HITBOX, 0))
-		return false;
-
-
-	studiohdr_t *hdr = I::ModelInfo->GetStudioModel(target->GetModel());
-
-	if (!hdr)
-		return false;
-
-	mstudiohitboxset_t *hitboxSet = hdr->pHitboxSet(target->GetHitboxSet());
-	mstudiobbox_t *untransformedBox = hitboxSet->pHitbox(hitbox->hitbox);
-
-	Vector bbmin = untransformedBox->bbmin;
-	Vector bbmax = untransformedBox->bbmax;
-
-	if (untransformedBox->radius != -1.f)
-	{
-		bbmin -= Vector(untransformedBox->radius, untransformedBox->radius, untransformedBox->radius);
-		bbmax += Vector(untransformedBox->radius, untransformedBox->radius, untransformedBox->radius);
-	}
-
-	Vector points[] =
-	{ ((bbmin + bbmax) * .5f),
-		Vector(bbmin.x, bbmin.y, bbmin.z),
-		Vector(bbmin.x, bbmax.y, bbmin.z),
-		Vector(bbmax.x, bbmax.y, bbmin.z),
-		Vector(bbmax.x, bbmin.y, bbmin.z),
-		Vector(bbmax.x, bbmax.y, bbmax.z),
-		Vector(bbmin.x, bbmax.y, bbmax.z),
-		Vector(bbmin.x, bbmin.y, bbmax.z),
-		Vector(bbmax.x, bbmin.y, bbmax.z)
-	};
-
-
-	for (int index = 0; index <= 8; ++index)
-	{
-		if (index != 0)
-			points[index] = ((((points[index] + points[0]) * .5f) + points[index]) * .5f);
-
-		M::VectorTransform(points[index], matrix[untransformedBox->bone], hitbox->points[index]);
-	}
-
-	return true;
-}*/
-
-/*Vector GetHitscan(IClientEntity* pEntity, int Hitbox)
-{
-	matrix3x4 matrix[128];
-
-	if (!pEntity->SetupBones(matrix, 128, 0x00000100, GetTickCount64()))
-		return Vector(0, 0, 0);
-
-	studiohdr_t* hdr = Interfaces::ModelInfo->GetStudiomodel(pEntity->GetModel());
-	mstudiohitboxset_t* set = hdr->GetHitboxSet(0);
-
-	for (int i = 0; i < 18; i++)
-	{
-		mstudiobbox_t* hitbox = set->GetHitbox(i);
-		if (!hitbox)
-			continue;
-
-		Vector vAimPoint;
-
-		Vector corners[17] =
-		{
-			Vector((hitbox->bbmin + hitbox->bbmax) * 0.5),
-			Vector(hitbox->bbmax.x - 1.65, hitbox->bbmax.y - 1.65, hitbox->bbmin.z + 1.65),
-			Vector(hitbox->bbmax.x - 1.65, hitbox->bbmax.y - 1.65, hitbox->bbmax.z - 1.65),
-			Vector(hitbox->bbmin.x + 1.65, hitbox->bbmax.y - 1.65, hitbox->bbmin.z + 1.65),
-			Vector(hitbox->bbmin.x + 1.65, hitbox->bbmax.y - 1.65, hitbox->bbmax.z - 1.65),
-			Vector(hitbox->bbmax.x - 1.65, hitbox->bbmin.y + 1.65, hitbox->bbmin.z + 1.65),
-			Vector(hitbox->bbmax.x - 1.65, hitbox->bbmin.y + 1.65, hitbox->bbmax.z - 1.65),
-			Vector(hitbox->bbmin.x + 1.65, hitbox->bbmin.y + 1.65, hitbox->bbmin.z + 1.65),
-			Vector(hitbox->bbmin.x + 1.65, hitbox->bbmin.y + 1.65, hitbox->bbmax.z - 1.65),
-			Vector(hitbox->bbmin.x, hitbox->bbmin.y, hitbox->bbmin.z),
-			Vector(hitbox->bbmin.x, hitbox->bbmin.y, hitbox->bbmax.z),
-			Vector(hitbox->bbmin.x, hitbox->bbmax.y, hitbox->bbmin.z),
-			Vector(hitbox->bbmin.x, hitbox->bbmax.y, hitbox->bbmax.z),
-			Vector(hitbox->bbmax.x, hitbox->bbmin.y, hitbox->bbmin.z),
-			Vector(hitbox->bbmax.x, hitbox->bbmin.y, hitbox->bbmax.z),
-			Vector(hitbox->bbmax.x, hitbox->bbmax.y, hitbox->bbmin.z),
-			Vector(hitbox->bbmax.x, hitbox->bbmax.y, hitbox->bbmax.z)
-		};
-
-		for (int j = 0; j < 17; j++)
-		{
-			if (!corners[j])
-				continue;
-
-			VectorTransform(corners[j], matrix[hitbox->bone], vAimPoint);
-		}
-
-		return vAimPoint;
-	}
-}*/
-
 Vector GetEyePosition(IClientEntity* pEntity)
 {
 	Vector vecViewOffset = *reinterpret_cast<Vector*>(reinterpret_cast<int>(pEntity) + 0x104);
@@ -521,21 +266,3 @@ void ForceUpdate()
 		popad
 	}
 }
-
-/*NET_SetConVar::NET_SetConVar(const char* name, const char* value)
-{
-	typedef void(__thiscall* SetConVarConstructor_t)(void*);
-	static SetConVarConstructor_t pNET_SetConVar = (SetConVarConstructor_t)(Utilities::Memory::FindPattern("engine.dll", (PBYTE)"\x83\xE9\x04\xE9\x00\x00\x00\x00\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x56\x8B\xF1\xC7\x06\x00\x00\x00\x00\x8D\x4E\x08", "xxxx????xxxxxxxxxxxxxxxx????xxx") + 19);
-	pNET_SetConVar(this);
-
-	typedef void(__thiscall* SetConVarInit_t)(void*, const char*, const char*);
-	static SetConVarInit_t pNET_SetConVarInit = (SetConVarInit_t)Utilities::Memory::FindPattern("engine.dll", (PBYTE)"\x55\x8B\xEC\x56\x8B\xF1\x57\x83\x4E\x14\x01\x83\x7E\x0C\x00", "xxxxxxxxxxxxxxx");
-	pNET_SetConVarInit(this, name, value);
-}
-
-NET_SetConVar::~NET_SetConVar()
-{
-	typedef void(__thiscall* SetConVarConstructor_t)(void*);
-	static SetConVarConstructor_t pNET_SetConVar = (SetConVarConstructor_t)(Utilities::Memory::FindPattern("engine.dll", (PBYTE)"\x00\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\xCC\x56\x8B\xF1\x57\x8D\x7E\x04\xC7\x07\x00\x00\x00\x00", "xxxxxxxxxxxxxxxxxxxxx????") + 12);
-	pNET_SetConVar(this);
-}*/

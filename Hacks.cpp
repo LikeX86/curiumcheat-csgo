@@ -43,8 +43,7 @@ void Hacks::DrawHacks()
 	void Hooked__PlaySoundCSGO(const char* fileName);
 
 	// Check the master visuals switch, just to be sure
-	if (!Menu::Window.VisualsTab.Active.GetState())
-		return;
+	if (!Menu::Window.VisualsTab.Active.GetState()) return;
 
 	if (Menu::Window.VisualsTab.OptionsCompRank.GetState() && GUI.GetKeyState(VK_TAB))
 		GameUtils::ServerRankRevealAll();

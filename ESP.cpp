@@ -15,9 +15,7 @@ void CEsp::Draw()
 	IClientEntity *pLocal = hackManager.pLocal();
 
 	if (Menu::Window.MiscTab.OtherSpectators.GetState())
-	{
 		SpecList();
-	}
 
 	// Loop through all active entitys
 	for (int i = 0; i < Interfaces::EntList->GetHighestEntityIndex(); i++)
@@ -38,18 +36,14 @@ void CEsp::Draw()
 
 			// Is it a player?!
 			if (Menu::Window.VisualsTab.FiltersPlayers.GetState() && Interfaces::Engine->GetPlayerInfo(i, &pinfo) && pEntity->IsAlive())
-			{
 				DrawPlayer(pEntity, pinfo);
-			}
 
 			// ~ Other ESP's here (items and shit) ~ //
 			ClientClass* cClass = (ClientClass*)pEntity->GetClientClass();
 
 			// Dropped weapons
 			if (Menu::Window.VisualsTab.FiltersWeapons.GetState() && cClass->m_ClassID != (int)CSGOClassID::CBaseWeaponWorldModel && ((strstr(cClass->m_pNetworkName, "Weapon") || cClass->m_ClassID == (int)CSGOClassID::CDEagle || cClass->m_ClassID == (int)CSGOClassID::CAK47)))
-			{
 				DrawDrop(pEntity, cClass);
-			}
 
 			// If entity is the bomb
 			if (Menu::Window.VisualsTab.FiltersC4.GetState())
@@ -63,10 +57,8 @@ void CEsp::Draw()
 
 			// If entity is a chicken
 			if (Menu::Window.VisualsTab.FiltersChickens.GetState())
-			{
 				if (cClass->m_ClassID == (int)CSGOClassID::CChicken)
 					DrawChicken(pEntity, cClass);
-			}
 		}
 	}
 
@@ -104,7 +96,6 @@ void CEsp::SpecList()
 					IClientEntity *pTarget = Interfaces::EntList->GetClientEntityFromHandle(obs);
 					player_info_t pinfo2;
 					if (pTarget)
-					{
 						if (Interfaces::Engine->GetPlayerInfo(pTarget->GetIndex(), &pinfo2))
 						{
 							char buf[255]; sprintf_s(buf, "%s => %s", pinfo.name, pinfo2.name);
@@ -113,7 +104,6 @@ void CEsp::SpecList()
 							Render::Text(scrn.right - TextSize.right - 4, (scrn.bottom / 2) + (16 * ayy), pTarget->GetIndex() == pLocal->GetIndex() ? Color(240, 70, 80, 255) : Color(255, 255, 255, 255), Render::Fonts::ESP, buf);
 							ayy++;
 						}
-					}
 				}
 			}
 		}
@@ -484,12 +474,8 @@ void CEsp::DrawBomb(IClientEntity* pEntity, ClientClass* cClass)
 	}
 
 	if (adopted)
-	{
 		if (Render::WorldToScreen(vOrig, vScreen))
-		{
 			Render::Text(vScreen.x, vScreen.y, Color(112, 230, 20, 255), Render::Fonts::ESP, "Bomb");
-		}
-	}
 }
 
 void DrawBoneArray(int* boneNumbers, int amount, IClientEntity* pEntity, Color color)
@@ -501,12 +487,8 @@ void DrawBoneArray(int* boneNumbers, int amount, IClientEntity* pEntity, Color c
 		Vector BoneScreen;
 
 		if (Render::WorldToScreen(Bone, BoneScreen))
-		{
 			if (i>0)
-			{
 				Render::Line(LastBoneScreen.x, LastBoneScreen.y, BoneScreen.x, BoneScreen.y, color);
-			}
-		}
 		LastBoneScreen = BoneScreen;
 	}
 }

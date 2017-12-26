@@ -1,5 +1,3 @@
-// Don't take credits for this ;) Joplin / Manhhao are the first uploaders ;)
-
 #include "LegitBot.h"
 #include "RenderManager.h"
 #include <iostream>
@@ -10,16 +8,12 @@ void CLegitBot::Init()
 	TargetID = -1;
 }
 
-void CLegitBot::Draw()
-{
-	
-}
+void CLegitBot::Draw() {}
 
 void CLegitBot::Move(CUserCmd *pCmd, bool &bSendPacket)
 {
 	// Master switch
-	if (!Menu::Window.LegitBotTab.Active.GetState())
-		return;
+	if (!Menu::Window.LegitBotTab.Active.GetState()) return;
 
 	// Aimbot
 	if (Menu::Window.LegitBotTab.AimbotEnable.GetState())
@@ -36,8 +30,7 @@ void CLegitBot::SyncWeaponSettings()
 	IClientEntity* pLocal = hackManager.pLocal();
 	CBaseCombatWeapon* pWeapon = (CBaseCombatWeapon*)Interfaces::EntList->GetClientEntityFromHandle(pLocal->GetActiveWeaponHandle());
 
-	if (!pWeapon)
-		return;
+	if (!pWeapon) return;
 
 	if (GameUtils::IsPistol(pWeapon))
 	{
@@ -168,9 +161,7 @@ void CLegitBot::DoAimbot(CUserCmd *pCmd, bool &bSendPacket)
 
 		// Memes
 		if (TargetID >= 0)
-		{
 			pTarget = Interfaces::EntList->GetClientEntity(TargetID);
-		}
 		else
 		{
 			pTarget = nullptr;

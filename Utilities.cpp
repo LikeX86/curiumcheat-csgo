@@ -2,11 +2,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "Utilities.h"
-#include <fstream>
 #include <Psapi.h>
-
-bool FileLog = false;
-std::ofstream logFile;
 
 // --------         Utilities Memory           ------------ //
 
