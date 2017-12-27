@@ -239,14 +239,6 @@ Color CEsp::GetPlayerColor(IClientEntity* pEntity)
 // 2D  Esp box
 void CEsp::DrawBox(CEsp::ESPBox size, Color color)
 {
-	//if (PlayerBoxes->GetStringIndex() == 1)
-	//{
-		// Full Box
-	//Render::Clear(size.x, size.y, size.w, size.h, color);
-	//Render::Clear(size.x - 1, size.y - 1, size.w + 2, size.h + 2, Color(10, 10, 10, 150)); 
-	//Render::Clear(size.x + 1, size.y + 1, size.w - 2, size.h - 2, Color(10, 10, 10, 150));
-	//}
-	//else
 	{
 		// Corner Box
 		int VertLine = (((float)size.w) * (0.20f));

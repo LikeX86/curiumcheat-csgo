@@ -437,7 +437,7 @@ void CGUI::SaveWindowState(CWindow* window, std::string Filename)
 	//Save the file
 	if (Doc.SaveFile(Filename.c_str()) != tinyxml2::XML_NO_ERROR)
 	{
-		MessageBox(NULL, "Failed To Save Config File!", "AyyWare", MB_OK);
+		MessageBox(NULL, "Failed To Save Config File!", "Curium", MB_OK);
 	}
 
 }

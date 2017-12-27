@@ -41,7 +41,6 @@ void AyyWareWindow::Setup()
 	RegisterTab(&LegitBotTab);
 	RegisterTab(&VisualsTab);
 	RegisterTab(&MiscTab);
-	//RegisterTab(&Playerlist);
 
 	RECT Client = GetClientArea();
 	Client.bottom -= 29;
@@ -50,7 +49,6 @@ void AyyWareWindow::Setup()
 	LegitBotTab.Setup();
 	VisualsTab.Setup();
 	MiscTab.Setup();
-	//Playerlist.Setup();
 
 #pragma region Bottom Buttons
 	SaveButton.SetText("Save Configuration");
@@ -69,19 +67,16 @@ void AyyWareWindow::Setup()
 	LegitBotTab.RegisterControl(&SaveButton);
 	VisualsTab.RegisterControl(&SaveButton);
 	MiscTab.RegisterControl(&SaveButton);
-	//Playerlist.RegisterControl(&SaveButton);
 
 	RageBotTab.RegisterControl(&LoadButton);
 	LegitBotTab.RegisterControl(&LoadButton);
 	VisualsTab.RegisterControl(&LoadButton);
 	MiscTab.RegisterControl(&LoadButton);
-	//Playerlist.RegisterControl(&LoadButton);
 
 	RageBotTab.RegisterControl(&UnloadButton);
 	LegitBotTab.RegisterControl(&UnloadButton);
 	VisualsTab.RegisterControl(&UnloadButton);
 	MiscTab.RegisterControl(&UnloadButton);
-	//Playerlist.RegisterControl(&UnloadButton);
 
 #pragma endregion Setting up the settings buttons
 }
