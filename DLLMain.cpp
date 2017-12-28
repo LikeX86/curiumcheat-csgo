@@ -45,26 +45,26 @@ int InitialThread()
 	// Junk code every 1 sec
 	while (DoUnload == false)
 	{
-		yacA();
-		Gqwk();
-		Dilm();
-		iPIf();
-		CkIw();
-		Ygsi();
-		InSj();
-		xIU();
-		mhdg();
-		QzOl();
-		KzTL();
-		GIjf();
-		LCw();
-		CUy();
-		RYu();
-		qyZ();
-		ccdL();
-		xke();
-		GJi();
-		niUD();
+		uSmn();
+		ykG();
+		dEis();
+		Styi();
+		eYeo();
+		GnE();
+		Itzk();
+		CcVs();
+		owh();
+		uUty();
+		XAH();
+		tZJK();
+		PlcS();
+		Lpth();
+		tnK();
+		xIR();
+		fzR();
+		GHA();
+		hgI();
+		cRu();
 		Sleep(1000);
 	}
 
