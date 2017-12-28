@@ -10,8 +10,8 @@ Curium is an open source cheat for Counter-Strike: Global Offensive game. Based 
 - and more
 ## Note
 I am not responsible for any game bans and damage cause by this software. Use in educational purposes only.
-**If you compile cheat from source you must protect it with Enigma Protector on your own or you will probably get a VAC ban!**
-Cheats in release section are already protected!
+**If you compile cheat from source you must protect it with Enigma Protector on your own or you will probably get a VAC ban!
+Cheats in release section are already protected!**
 ## How to compile
 1. Clone repository from GitHub.
 1. Open curiumcheat-csgo.sln in Visual Studio 2017.
@@ -22,7 +22,7 @@ Cheats in release section are already protected!
 ## How to use
 1. Download cheat release or compile from source (read "How to compile" section).
 1. Open Counter-Strike: Global Offensive.
-1. Inject curiumcheat-csgo.dll to game process. Remember to use undetected injector.
+1. Inject curiumcheat-csgo.dll to game process. Remember to use undetected injector (I advise you curiuminjector-csgo - https://github.com/danielkrupinski/curiuminjector-csgo)
 1. Wait ~5 sec
 1. Open menu - press Insert
 1. Play!
