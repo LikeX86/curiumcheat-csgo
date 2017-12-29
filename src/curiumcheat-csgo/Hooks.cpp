@@ -715,7 +715,7 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 1) // Karambit
+					else if (Model == 1) // Bayonet
 					{
 						*Weapon->ModelIndex() = iBayonet; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iBayonet;
@@ -761,12 +761,12 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 2) // Karambit
+					else if (Model == 2) // Butterfly
 					{
 						*Weapon->ModelIndex() = iButterfly; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iButterfly;
 						*Weapon->WorldModelIndex() = iButterfly + 1;
-						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 515;
 
 						if (Skin == 0)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
@@ -807,12 +807,12 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 3) // Karambit
+					else if (Model == 3) // Flip
 					{
 						*Weapon->ModelIndex() = iFlip; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iFlip;
 						*Weapon->WorldModelIndex() = iFlip + 1;
-						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 505;
 
 						if (Skin == 0)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
@@ -853,12 +853,12 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 4) // Karambit
+					else if (Model == 4) // Gut
 					{
 						*Weapon->ModelIndex() = iGut; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iGut;
 						*Weapon->WorldModelIndex() = iGut + 1;
-						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 506;
 
 						if (Skin == 0)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
@@ -899,12 +899,12 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 5) // Karambit
+					else if (Model == 5) // M9Bayonet
 					{
 						*Weapon->ModelIndex() = iM9Bayonet; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iM9Bayonet;
 						*Weapon->WorldModelIndex() = iM9Bayonet + 1;
-						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 508;
 
 						if (Skin == 0)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
@@ -945,12 +945,12 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 6) // Karambit
+					else if (Model == 6) // Huntsman
 					{
 						*Weapon->ModelIndex() = iHuntsman; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iHuntsman;
 						*Weapon->WorldModelIndex() = iHuntsman + 1;
-						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 509;
 
 						if (Skin == 0)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
@@ -991,12 +991,12 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 7) // Karambit
+					else if (Model == 7) // Falchion
 					{
 						*Weapon->ModelIndex() = iFalchion; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iFalchion;
 						*Weapon->WorldModelIndex() = iFalchion + 1;
-						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 512;
 
 						if (Skin == 0)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
@@ -1037,12 +1037,12 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 8) // Karambit
+					else if (Model == 8) // Dagger
 					{
 						*Weapon->ModelIndex() = iDagger; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iDagger;
 						*Weapon->WorldModelIndex() = iDagger + 1;
-						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 516;
 
 						if (Skin == 0)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
@@ -1083,12 +1083,12 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
-					else if (Model == 9) // Karambit
+					else if (Model == 9) // Bowie
 					{
 						*Weapon->ModelIndex() = iBowie; // m_nModelIndex
 						*Weapon->ViewModelIndex() = iBowie;
 						*Weapon->WorldModelIndex() = iBowie + 1;
-						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 514;
 
 						if (Skin == 0)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
