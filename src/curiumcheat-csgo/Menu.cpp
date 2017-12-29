@@ -41,6 +41,7 @@ void AyyWareWindow::Setup()
 	RegisterTab(&LegitBotTab);
 	RegisterTab(&VisualsTab);
 	RegisterTab(&MiscTab);
+	//RegisterTab(&Playerlist);
 
 	RECT Client = GetClientArea();
 	Client.bottom -= 29;
@@ -49,6 +50,7 @@ void AyyWareWindow::Setup()
 	LegitBotTab.Setup();
 	VisualsTab.Setup();
 	MiscTab.Setup();
+	//Playerlist.Setup();
 
 #pragma region Bottom Buttons
 	SaveButton.SetText("Save Configuration");
@@ -58,7 +60,7 @@ void AyyWareWindow::Setup()
 	LoadButton.SetText("Load Configuration");
 	LoadButton.SetCallback(LoadCallbk);
 	LoadButton.SetPosition(203, Client.bottom - 42);
-	
+
 	UnloadButton.SetText("Complete Unload");
 	UnloadButton.SetCallback(UnLoadCallbk);
 	UnloadButton.SetPosition(396, Client.bottom - 42);
@@ -67,16 +69,19 @@ void AyyWareWindow::Setup()
 	LegitBotTab.RegisterControl(&SaveButton);
 	VisualsTab.RegisterControl(&SaveButton);
 	MiscTab.RegisterControl(&SaveButton);
+	//Playerlist.RegisterControl(&SaveButton);
 
 	RageBotTab.RegisterControl(&LoadButton);
 	LegitBotTab.RegisterControl(&LoadButton);
 	VisualsTab.RegisterControl(&LoadButton);
 	MiscTab.RegisterControl(&LoadButton);
+	//Playerlist.RegisterControl(&LoadButton);
 
 	RageBotTab.RegisterControl(&UnloadButton);
 	LegitBotTab.RegisterControl(&UnloadButton);
 	VisualsTab.RegisterControl(&UnloadButton);
 	MiscTab.RegisterControl(&UnloadButton);
+	//Playerlist.RegisterControl(&UnloadButton);
 
 #pragma endregion Setting up the settings buttons
 }
@@ -200,7 +205,7 @@ void CRageBotTab::Setup()
 	AccuracyHitchance.SetBoundaries(0, 100);
 	AccuracyHitchance.SetValue(0);
 	AccuracyGroup.PlaceLabledControl("Hit Chance", this, &AccuracyHitchance);
-	
+
 	AccuracyResolver.SetFileId("acc_aaa");
 	AccuracyResolver.AddItem("Off");
 	AccuracyResolver.AddItem("Auto Yaw Resolve");
@@ -300,7 +305,7 @@ void CLegitBotTab::Setup()
 
 	AimbotKeyBind.SetFileId("aim_key");
 	AimbotGroup.PlaceLabledControl("Key Bind", this, &AimbotKeyBind);
-	
+
 	AimbotAutoPistol.SetFileId("aim_apistol");
 	AimbotGroup.PlaceLabledControl("Auto Pistol", this, &AimbotAutoPistol);
 
@@ -333,7 +338,7 @@ void CLegitBotTab::Setup()
 	RegisterControl(&WeaponMainGroup);
 
 	WeaponMainSpeed.SetFileId("main_speed");
-	WeaponMainSpeed.SetBoundaries(0.1f, 2.f); 
+	WeaponMainSpeed.SetBoundaries(0.1f, 2.f);
 	WeaponMainSpeed.SetValue(1.0f);
 	WeaponMainGroup.PlaceLabledControl("Max Speed", this, &WeaponMainSpeed);
 
@@ -473,7 +478,7 @@ void CVisualTab::Setup()
 
 	OptionsAimSpot.SetFileId("opt_aimspot");
 	OptionsGroup.PlaceLabledControl("Head Cross", this, &OptionsAimSpot);
-	
+
 	OptionsCompRank.SetFileId("opt_comprank");
 	OptionsGroup.PlaceLabledControl("Player Ranks", this, &OptionsCompRank);
 
@@ -562,14 +567,37 @@ void CMiscTab::Setup()
 	KnifeGroup.PlaceLabledControl("Enable", this, &KnifeEnable);
 
 	KnifeModel.SetFileId("knife_model");
-	KnifeModel.AddItem("Karam");
-	KnifeModel.AddItem("Bayo");
+	KnifeModel.AddItem("Karambit");
+	KnifeModel.AddItem("Bayonet");
+	KnifeModel.AddItem("Butterfly Knife");
+	KnifeModel.AddItem("Flip Knife");
+	KnifeModel.AddItem("Gut Knife");
+	KnifeModel.AddItem("M9 Bayonet");
+	KnifeModel.AddItem("Huntsman Knife");
+	KnifeModel.AddItem("Falchion Knife");
+	KnifeModel.AddItem("Shadow Daggers");
+	KnifeModel.AddItem("Bowie Knife");
 	KnifeGroup.PlaceLabledControl("Knife", this, &KnifeModel);
 
 	KnifeSkin.SetFileId("knife_skin");
-	KnifeSkin.AddItem("Doppler Sapphire");
 	KnifeSkin.AddItem("Doppler Ruby");
-	KnifeSkin.AddItem("Tiger");
+	KnifeSkin.AddItem("Doppler Sapphire");
+	KnifeSkin.AddItem("Doppler Black Pearl");
+	KnifeSkin.AddItem("Doppler");
+	KnifeSkin.AddItem("Doppler");
+	KnifeSkin.AddItem("Doppler");
+	KnifeSkin.AddItem("Doppler");
+	KnifeSkin.AddItem("Forest DDPAT");
+	KnifeSkin.AddItem("Crimson Web");
+	KnifeSkin.AddItem("Slaughter");
+	KnifeSkin.AddItem("Fade");
+	KnifeSkin.AddItem("Night");
+	KnifeSkin.AddItem("Blue Steel");
+	KnifeSkin.AddItem("Case Hardened");
+	KnifeSkin.AddItem("Ultraviolet");
+	KnifeSkin.AddItem("Damascus Steel");
+	KnifeSkin.AddItem("Tiger Tooth");
+	KnifeSkin.AddItem("Marble Fade");
 	KnifeSkin.AddItem("Lore");
 	KnifeGroup.PlaceLabledControl("Skin", this, &KnifeSkin);
 

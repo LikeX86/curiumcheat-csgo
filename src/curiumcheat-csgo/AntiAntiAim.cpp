@@ -1,9 +1,6 @@
-// Credits to Valve and Shad0w
 #include "Interfaces.h"
 #include "Menu.h"
 
-// Shad0ws Yaw fix
-// (FIX ME UP LATER)
 void FixY(const CRecvProxyData *pData, void *pStruct, void *pOut)
 {
 	static Vector vLast[65];
@@ -60,7 +57,9 @@ void FixY(const CRecvProxyData *pData, void *pStruct, void *pOut)
 				bSpinbot = true;
 			}
 			else
+			{
 				bShotLastTime[((IClientEntity*)(pStruct))->GetIndex()] = false;
+			}
 		}
 
 		vLast[((IClientEntity*)(pStruct))->GetIndex()].y = flYaw;
@@ -71,9 +70,12 @@ void FixY(const CRecvProxyData *pData, void *pStruct, void *pOut)
 		bJitterFix[((IClientEntity*)(pStruct))->GetIndex()] = (flYaw >= 180.0f && flYaw <= 360.0f);
 
 		if (bTmp && (flYaw >= 0.0f && flYaw <= 180.0f))
+		{
 			flYaw += 359.0f;
+		}
 		break;
 	}
+
 	*(float*)(pOut) = flYaw;
 }
 
@@ -115,7 +117,7 @@ void FixX(const CRecvProxyData* pData, void* pStruct, void* pOut) // Clamp other
 		if (pData->m_Value.m_Float > 180.0f)
 			*ang -= 360.0f;
 		else if (pData->m_Value.m_Float < -180.0f)
-			*ang += 360.0f; 
+			*ang += 360.0f;
 		break;
 	}
 }
@@ -129,6 +131,14 @@ void Hooked_RecvProxy_Viewmodel(CRecvProxyData *pData, void *pStruct, void *pOut
 	static int default_ct = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_default_ct.mdl");
 	static int bayonet = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_bayonet.mdl");
 	static int karam = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_karam.mdl");
+	static int iButterfly = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_butterfly.mdl");
+	static int iFlip = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_flip.mdl");
+	static int iGut = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_gut.mdl");
+	static int iM9Bayonet = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_m9_bay.mdl");
+	static int iHuntsman = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_tactical.mdl");
+	static int iFalchion = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_falchion_advanced.mdl");
+	static int iDagger = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_push.mdl");
+	static int iBowie = Interfaces::ModelInfo->GetModelIndex("models/weapons/v_knife_survival_bowie.mdl");
 
 	// Get local player (just to stop replacing spectators knifes)
 	IClientEntity* pLocal = Interfaces::EntList->GetClientEntity(Interfaces::Engine->GetLocalPlayer());
@@ -142,6 +152,22 @@ void Hooked_RecvProxy_Viewmodel(CRecvProxyData *pData, void *pStruct, void *pOut
 				pData->m_Value.m_Int = karam;
 			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 1)
 				pData->m_Value.m_Int = bayonet;
+			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 2)
+				pData->m_Value.m_Int = iButterfly;
+			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 3)
+				pData->m_Value.m_Int = iFlip;
+			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 4)
+				pData->m_Value.m_Int = iGut;
+			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 5)
+				pData->m_Value.m_Int = iM9Bayonet;
+			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 6)
+				pData->m_Value.m_Int = iHuntsman;
+			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 7)
+				pData->m_Value.m_Int = iFalchion;
+			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 8)
+				pData->m_Value.m_Int = iDagger;
+			else if (Menu::Window.MiscTab.KnifeModel.GetIndex() == 9)
+				pData->m_Value.m_Int = iBowie;
 		}
 	}
 
@@ -164,11 +190,15 @@ void ApplyAAAHooks()
 
 				// Pitch Fix
 				if (!strcmp(name, "m_angEyeAngles[0]"))
+				{
 					pProp->m_ProxyFn = FixX;
+				}
 
 				// Yaw Fix
 				if (!strcmp(name, "m_angEyeAngles[1]"))
+				{
 					pProp->m_ProxyFn = FixY;
+				}
 			}
 		}
 		else if (!strcmp(pszName, "DT_BaseViewModel"))

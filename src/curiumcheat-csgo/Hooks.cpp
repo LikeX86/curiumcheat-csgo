@@ -52,6 +52,34 @@ namespace Hooks
 	Utilities::Memory::VMTManager VMTRenderView;
 };
 
+/*// Initialise all our hooks
+void Hooks::Initialise()
+{
+// Panel hooks for drawing to the screen via surface functions
+VMTPanel.Initialise((DWORD*)Interfaces::Panels);
+oPaintTraverse = (PaintTraverse_)VMTPanel.HookMethod((DWORD)&PaintTraverse_Hooked, Offsets::VMT::Panel_PaintTraverse);
+//Utilities::Log("Paint Traverse Hooked");
+
+// No Visual Recoil
+VMTPrediction.Initialise((DWORD*)Interfaces::Prediction);
+VMTPrediction.HookMethod((DWORD)&Hooked_InPrediction, 14);
+//Utilities::Log("InPrediction Hooked");
+
+// Chams
+VMTModelRender.Initialise((DWORD*)Interfaces::ModelRender);
+oDrawModelExecute = (DrawModelEx_)VMTModelRender.HookMethod((DWORD)&Hooked_DrawModelExecute, Offsets::VMT::ModelRender_DrawModelExecute);
+//Utilities::Log("DrawModelExecute Hooked");
+
+// Setup ClientMode Hooks
+//VMTClientMode.Initialise((DWORD*)Interfaces::ClientMode);
+//VMTClientMode.HookMethod((DWORD)&CreateMoveClient_Hooked, 24);
+//Utilities::Log("ClientMode CreateMove Hooked");
+
+// Setup client hooks
+VMTClient.Initialise((DWORD*)Interfaces::Client);
+oCreateMove = (CreateMoveFn)VMTClient.HookMethod((DWORD)&hkCreateMove, 21);
+}*/
+
 // Undo our hooks
 void Hooks::UndoHooks()
 {
@@ -61,6 +89,7 @@ void Hooks::UndoHooks()
 	VMTClientMode.RestoreOriginal();
 }
 
+
 // Initialise all our hooks
 void Hooks::Initialise()
 {
@@ -69,7 +98,7 @@ void Hooks::Initialise()
 	oPaintTraverse = (PaintTraverse_)VMTPanel.HookMethod((DWORD)&PaintTraverse_Hooked, Offsets::VMT::Panel_PaintTraverse);
 	//Utilities::Log("Paint Traverse Hooked");
 
-	// No Visual Recoil
+	// No Visual Recoi	l
 	VMTPrediction.Initialise((DWORD*)Interfaces::Prediction);
 	VMTPrediction.HookMethod((DWORD)&Hooked_InPrediction, 14);
 	//Utilities::Log("InPrediction Hooked");
@@ -92,13 +121,16 @@ void Hooks::Initialise()
 
 }
 
-void MovementCorrection(CUserCmd* pCmd) {}
+void MovementCorrection(CUserCmd* pCmd)
+{
+
+}
 
 //---------------------------------------------------------------------------------------------------------
 //                                         Hooked Functions
 //---------------------------------------------------------------------------------------------------------
 
-void SetClanTag(const char* tag, const char* name)
+void SetClanTag(const char* tag, const char* name)//190% paste
 {
 	static auto pSetClanTag = reinterpret_cast<void(__fastcall*)(const char*, const char*)>(((DWORD)Utilities::Memory::FindPattern("engine.dll", (PBYTE)"\x53\x56\x57\x8B\xDA\x8B\xF9\xFF\x15\x00\x00\x00\x00\x6A\x24\x8B\xC8\x8B\x30", "xxxxxxxxx????xxxxxx")));
 	pSetClanTag(tag, name);
@@ -206,6 +238,11 @@ bool __stdcall CreateMoveClient_Hooked(/*void* self, int edx,*/ float frametime,
 		if (Menu::Window.MiscTab.OtherClantag.GetIndex() > 0)
 			ClanTag();
 
+		//	CUserCmd* cmdlist = *(CUserCmd**)((DWORD)Interfaces::pInput + 0xEC);
+		//	CUserCmd* pCmd = &cmdlist[sequence_number % 150];
+
+
+		// Backup for safety
 		Vector origView = pCmd->viewangles;
 		Vector viewforward, viewright, viewup, aimforward, aimright, aimup;
 		Vector qAimAngles;
@@ -546,7 +583,9 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 			}
 		}
 		else if (!Menu::Window.MiscTab.OtherThirdperson.GetState())
+		{
 			rekt1 = false;
+		}
 
 		static bool rekt = false;
 		if (!Menu::Window.MiscTab.OtherThirdperson.GetState() || pLocal->IsAlive() == 0 || pLocal->IsScoped())
@@ -558,7 +597,9 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 			}
 		}
 		else if (Menu::Window.MiscTab.OtherThirdperson.GetState() || pLocal->IsAlive() || pLocal->IsScoped() == 0)
+		{
 			rekt = false;
+		}
 
 		static bool meme = false;
 		if (Menu::Window.MiscTab.OtherThirdperson.GetState() && pLocal->IsScoped() == 0)
@@ -570,7 +611,9 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 			}
 		}
 		else if (pLocal->IsScoped())
+		{
 			meme = false;
+		}
 
 		static bool kek = false;
 		if (Menu::Window.MiscTab.OtherThirdperson.GetState() && pLocal->IsAlive())
@@ -582,12 +625,26 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 			}
 		}
 		else if (pLocal->IsAlive() == 0)
+		{
 			kek = false;
+		}
 	}
 
 	if (Interfaces::Engine->IsConnected() && Interfaces::Engine->IsInGame() && curStage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
 	{
 		IClientEntity *pLocal = Interfaces::EntList->GetClientEntity(Interfaces::Engine->GetLocalPlayer());
+
+		/*	for (int i = 1; i < 65; i++)
+		{
+		IClientEntity* pEnt = Interfaces::EntList->GetClientEntity(i);
+		if (!pEnt) continue;
+		if (pEnt->IsDormant()) continue;
+		if (pEnt->GetHealth() < 1) continue;
+		if (pEnt->GetLifeState() != 0) continue;
+
+		*(float*)((DWORD)pEnt + eyeangles) = pEnt->GetTargetYaw();
+		//Msg("%f\n", *(float*)((DWORD)pEnt + m_angEyeAnglesYaw));
+		} */
 
 		if (Menu::Window.MiscTab.KnifeEnable.GetState() && pLocal)
 		{
@@ -620,12 +677,42 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 507;
 
 						if (Skin == 0)
-							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
-						else if (Skin == 1)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
 						else if (Skin == 2)
-							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
 						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus Steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
 					else if (Model == 1) // Karambit
@@ -636,12 +723,410 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
 
 						if (Skin == 0)
-							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
-						else if (Skin == 1)
 							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
 						else if (Skin == 2)
-							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
 						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
+							*Weapon->FallbackPaintKit() = 558; // Lore
+					}
+					else if (Model == 2) // Karambit
+					{
+						*Weapon->ModelIndex() = iButterfly; // m_nModelIndex
+						*Weapon->ViewModelIndex() = iButterfly;
+						*Weapon->WorldModelIndex() = iButterfly + 1;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+
+						if (Skin == 0)
+							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
+						else if (Skin == 2)
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
+						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
+							*Weapon->FallbackPaintKit() = 558; // Lore
+					}
+					else if (Model == 3) // Karambit
+					{
+						*Weapon->ModelIndex() = iFlip; // m_nModelIndex
+						*Weapon->ViewModelIndex() = iFlip;
+						*Weapon->WorldModelIndex() = iFlip + 1;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+
+						if (Skin == 0)
+							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
+						else if (Skin == 2)
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
+						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
+							*Weapon->FallbackPaintKit() = 558; // Lore
+					}
+					else if (Model == 4) // Karambit
+					{
+						*Weapon->ModelIndex() = iGut; // m_nModelIndex
+						*Weapon->ViewModelIndex() = iGut;
+						*Weapon->WorldModelIndex() = iGut + 1;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+
+						if (Skin == 0)
+							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
+						else if (Skin == 2)
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
+						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
+							*Weapon->FallbackPaintKit() = 558; // Lore
+					}
+					else if (Model == 5) // Karambit
+					{
+						*Weapon->ModelIndex() = iM9Bayonet; // m_nModelIndex
+						*Weapon->ViewModelIndex() = iM9Bayonet;
+						*Weapon->WorldModelIndex() = iM9Bayonet + 1;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+
+						if (Skin == 0)
+							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
+						else if (Skin == 2)
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
+						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
+							*Weapon->FallbackPaintKit() = 558; // Lore
+					}
+					else if (Model == 6) // Karambit
+					{
+						*Weapon->ModelIndex() = iHuntsman; // m_nModelIndex
+						*Weapon->ViewModelIndex() = iHuntsman;
+						*Weapon->WorldModelIndex() = iHuntsman + 1;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+
+						if (Skin == 0)
+							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
+						else if (Skin == 2)
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
+						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
+							*Weapon->FallbackPaintKit() = 558; // Lore
+					}
+					else if (Model == 7) // Karambit
+					{
+						*Weapon->ModelIndex() = iFalchion; // m_nModelIndex
+						*Weapon->ViewModelIndex() = iFalchion;
+						*Weapon->WorldModelIndex() = iFalchion + 1;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+
+						if (Skin == 0)
+							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
+						else if (Skin == 2)
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
+						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
+							*Weapon->FallbackPaintKit() = 558; // Lore
+					}
+					else if (Model == 8) // Karambit
+					{
+						*Weapon->ModelIndex() = iDagger; // m_nModelIndex
+						*Weapon->ViewModelIndex() = iDagger;
+						*Weapon->WorldModelIndex() = iDagger + 1;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+
+						if (Skin == 0)
+							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
+						else if (Skin == 2)
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
+						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
+							*Weapon->FallbackPaintKit() = 558; // Lore
+					}
+					else if (Model == 9) // Karambit
+					{
+						*Weapon->ModelIndex() = iBowie; // m_nModelIndex
+						*Weapon->ViewModelIndex() = iBowie;
+						*Weapon->WorldModelIndex() = iBowie + 1;
+						*Weapon->m_AttributeManager()->m_Item()->ItemDefinitionIndex() = 500;
+
+						if (Skin == 0)
+							*Weapon->FallbackPaintKit() = 415; // Doppler Ruby
+						else if (Skin == 1)
+							*Weapon->FallbackPaintKit() = 416; // Doppler Sapphire
+						else if (Skin == 2)
+							*Weapon->FallbackPaintKit() = 417; // Doppler Black Pearl
+						else if (Skin == 3)
+							*Weapon->FallbackPaintKit() = 418; // Doppler
+						else if (Skin == 4)
+							*Weapon->FallbackPaintKit() = 419; // Doppler
+						else if (Skin == 5)
+							*Weapon->FallbackPaintKit() = 420; // Doppler
+						else if (Skin == 6)
+							*Weapon->FallbackPaintKit() = 421; // Doppler
+						else if (Skin == 7)
+							*Weapon->FallbackPaintKit() = 5; // Forest DDPAT
+						else if (Skin == 8)
+							*Weapon->FallbackPaintKit() = 12; // Crimson Web
+						else if (Skin == 9)
+							*Weapon->FallbackPaintKit() = 59; // Slaughter
+						else if (Skin == 10)
+							*Weapon->FallbackPaintKit() = 38; // Fade
+						else if (Skin == 11)
+							*Weapon->FallbackPaintKit() = 40; // Night
+						else if (Skin == 12)
+							*Weapon->FallbackPaintKit() = 42; // Blue Steel
+						else if (Skin == 13)
+							*Weapon->FallbackPaintKit() = 44; // Case Hardened
+						else if (Skin == 14)
+							*Weapon->FallbackPaintKit() = 98; // Ultraviolet
+						else if (Skin == 15)
+							*Weapon->FallbackPaintKit() = 410; // Damascus steel
+						else if (Skin == 16)
+							*Weapon->FallbackPaintKit() = 409; // Tiger Tooth
+						else if (Skin == 17)
+							*Weapon->FallbackPaintKit() = 413; // Marble Fade
+						else if (Skin == 18)
 							*Weapon->FallbackPaintKit() = 558; // Lore
 					}
 
@@ -666,10 +1151,14 @@ void __fastcall Hooked_OverrideView(void* ecx, void* edx, CViewSetup* pSetup)
 	if (Interfaces::Engine->IsConnected() && Interfaces::Engine->IsInGame())
 	{
 		if (Menu::Window.VisualsTab.Active.GetState() && pLocal->IsAlive() && !pLocal->IsScoped())
+		{
 			if (pSetup->fov = 90)
 				pSetup->fov = Menu::Window.VisualsTab.OtherFOV.GetValue();
+		}
+
 		oOverrideView(ecx, edx, pSetup);
 	}
+
 }
 
 void GetViewModelFOV(float& fov)
@@ -684,7 +1173,7 @@ void GetViewModelFOV(float& fov)
 
 
 		if (Menu::Window.VisualsTab.Active.GetState())
-		fov += Menu::Window.VisualsTab.OtherViewmodelFOV.GetValue();
+			fov += Menu::Window.VisualsTab.OtherViewmodelFOV.GetValue();
 	}
 }
 
