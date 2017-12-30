@@ -52,34 +52,6 @@ namespace Hooks
 	Utilities::Memory::VMTManager VMTRenderView;
 };
 
-/*// Initialise all our hooks
-void Hooks::Initialise()
-{
-// Panel hooks for drawing to the screen via surface functions
-VMTPanel.Initialise((DWORD*)Interfaces::Panels);
-oPaintTraverse = (PaintTraverse_)VMTPanel.HookMethod((DWORD)&PaintTraverse_Hooked, Offsets::VMT::Panel_PaintTraverse);
-//Utilities::Log("Paint Traverse Hooked");
-
-// No Visual Recoil
-VMTPrediction.Initialise((DWORD*)Interfaces::Prediction);
-VMTPrediction.HookMethod((DWORD)&Hooked_InPrediction, 14);
-//Utilities::Log("InPrediction Hooked");
-
-// Chams
-VMTModelRender.Initialise((DWORD*)Interfaces::ModelRender);
-oDrawModelExecute = (DrawModelEx_)VMTModelRender.HookMethod((DWORD)&Hooked_DrawModelExecute, Offsets::VMT::ModelRender_DrawModelExecute);
-//Utilities::Log("DrawModelExecute Hooked");
-
-// Setup ClientMode Hooks
-//VMTClientMode.Initialise((DWORD*)Interfaces::ClientMode);
-//VMTClientMode.HookMethod((DWORD)&CreateMoveClient_Hooked, 24);
-//Utilities::Log("ClientMode CreateMove Hooked");
-
-// Setup client hooks
-VMTClient.Initialise((DWORD*)Interfaces::Client);
-oCreateMove = (CreateMoveFn)VMTClient.HookMethod((DWORD)&hkCreateMove, 21);
-}*/
-
 // Undo our hooks
 void Hooks::UndoHooks()
 {
@@ -88,7 +60,6 @@ void Hooks::UndoHooks()
 	VMTModelRender.RestoreOriginal();
 	VMTClientMode.RestoreOriginal();
 }
-
 
 // Initialise all our hooks
 void Hooks::Initialise()
@@ -633,18 +604,6 @@ void  __stdcall Hooked_FrameStageNotify(ClientFrameStage_t curStage)
 	if (Interfaces::Engine->IsConnected() && Interfaces::Engine->IsInGame() && curStage == FRAME_NET_UPDATE_POSTDATAUPDATE_START)
 	{
 		IClientEntity *pLocal = Interfaces::EntList->GetClientEntity(Interfaces::Engine->GetLocalPlayer());
-
-		/*	for (int i = 1; i < 65; i++)
-		{
-		IClientEntity* pEnt = Interfaces::EntList->GetClientEntity(i);
-		if (!pEnt) continue;
-		if (pEnt->IsDormant()) continue;
-		if (pEnt->GetHealth() < 1) continue;
-		if (pEnt->GetLifeState() != 0) continue;
-
-		*(float*)((DWORD)pEnt + eyeangles) = pEnt->GetTargetYaw();
-		//Msg("%f\n", *(float*)((DWORD)pEnt + m_angEyeAnglesYaw));
-		} */
 
 		if (Menu::Window.MiscTab.KnifeEnable.GetState() && pLocal)
 		{
