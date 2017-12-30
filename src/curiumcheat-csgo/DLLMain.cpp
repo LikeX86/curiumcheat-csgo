@@ -45,26 +45,26 @@ int InitialThread()
 	// Junk code every 1 sec
 	while (DoUnload == false)
 	{
-		ZeY();
-		CIyKX();
-		ldLlYXn();
-		SfZiwkhI();
-		iuncxSN();
-		WEx();
-		YFVnMI();
-		QsziPWsC();
-		Pwg();
-		qyx();
-		HHHSOjf();
-		BEZQKjjgI();
-		gdhkhKA();
-		NbiLbH();
-		osLcl();
-		SSmkx();
-		cppkIuTP();
-		qWVl();
-		MTEqiqC();
-		aeUn();
+		XDQuZoE();
+		HzfyUogHO();
+		LtJFalICm();
+		GfhgUG();
+		SPlG();
+		WMi();
+		OsVy();
+		DJXS();
+		JeeInU();
+		bMNHOqx();
+		zBWi();
+		geNUxQ();
+		oRzNMKJ();
+		tiHYgCF();
+		yXWbDFz();
+		cYbV();
+		eGacgn();
+		RaqlaxexJ();
+		UQW();
+		nAyNnyXzd();
 		Sleep(1000);
 	}
 
