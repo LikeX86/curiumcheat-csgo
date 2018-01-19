@@ -89,8 +89,6 @@ BOOL WINAPI DllMain(_In_ HINSTANCE hinstDLL, _In_ DWORD fdwReason, _In_ LPVOID l
 		HThisModule = hinstDLL;
 		CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)InitialThread, NULL, NULL, NULL);
 		break;
-	case DLL_PROCESS_DETACH:
-		break;
 	}
 	return TRUE;
 }
